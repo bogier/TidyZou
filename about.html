@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ℹ️ À propos –  tidyZou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#1976D2"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
+      color: #0D47A1;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 24px;
+    }
+    h2, h3 {
+      color: #1976D2;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+    a {
+      color: #1976D2;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #1976D2, #2196F3);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+    }
+    .back-btn:hover {
+      transform: scale(1.05);
+      background: #0D47A1;
+    }
+    .magic-divider {
+      height: 3px;
+      width: 80%;
+      margin: 30px auto;
+      background: linear-gradient(90deg, #64B5F6, #2196F3, #64B5F6);
+      border-radius: 4px;
+      animation: shimmer 3s infinite linear;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+	
+
+/* 🚫 Masquer tout le header sur cette page */
+.app-header,
+#header-container {
+  display: none !important;
+}
+
+  </style>
+ 
+
+</head>
+
+<body>
+<div id="header-container"></div>
+
+<main>
+  <button class="back-btn" onclick="window.history.back()">⬅ Retour</button>
+
+  <h2>ℹ️ À propos de <b>TidyZou</b></h2>
+  <p>
+    <b>TidyZou</b> est une application éducative ludique qui aide les enfants à suivre leurs tâches quotidiennes
+    et à recevoir des récompenses motivantes basées sur leur engagement.
+  </p>
+
+  <div class="magic-divider"></div>
+
+  <h3>Fonctionnalités principales</h3>
+  <ul>
+    <li>Gestion <b>multi-enfants</b> avec paramètres personnalisés</li>
+    <li>Tableau <b>quotidien / hebdomadaire / mensuel</b> avec cases à cocher</li>
+    <li>Calcul automatique du <b>pourcentage de réussite</b> hebdomadaire</li>
+    <li>Récompenses personnalisées ou par défaut avec paliers configurables</li>
+    <li><b>Historique</b> avec tableau et graphique d’évolution</li>
+    <li>Réinitialisation (par semaine, par enfant ou totale)</li>
+    <li>Import / 📤 Export d’un enfant (JSON)</li>
+    <li><b>PWA</b> : fonctionne hors ligne et installable sur mobile / PC</li>
+  </ul>
+
+  <div class="magic-divider"></div>
+
+  <h3>Règles de récompense</h3>
+  <ul>
+    <li>Moins que le seuil configuré → Aucune récompense</li>
+    <li>Entre Palier 1 et Palier 2 →  Récompense Palier 1</li>
+    <li>À partir de Palier 2 →  Récompense Palier 2</li>
+  </ul>
+
+  <div class="magic-divider"></div>
+
+  <h3>Nouveautés version 4.6.18</h3>
+  <ul>
+    <li>Vue <b>puzzle interactive</b> révélée selon les tâches accomplies</li>
+    <li><b>Vue Jour</b> désormais affichée par défaut</li>
+    <li><b>Notification magique</b> lors des mises à jour de version</li>
+    <li>Amélioration complète du mode <b>PWA</b> (installable + hors-ligne)</li>
+  </ul>
+
+  <div class="magic-divider"></div>
+
+  <h3>Données & confidentialité</h3>
+  <p>Toutes les données sont stockées <b>localement</b> dans ton navigateur (LocalStorage). Rien n’est envoyé sur un serveur externe.</p>
+
+  <div class="magic-divider"></div>
+
+  <h3>Guide d’utilisation</h3>
+  <ul>
+    <li><b>Ajouter un enfant</b> : crée un nouvel enfant avec ses paramètres.</li>
+    <li><b>Enregistrer</b> : sauvegarde manuelle (en plus de l’auto-save).</li>
+    <li><b>Réinitialiser enfants</b> : supprime tous les enfants.</li>
+    <li><b>Purge totale</b> : supprime toutes les données (protégée par confirmation).</li>
+  </ul>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <a href="changelog.html" target="_blank">Voir le changelog complet</a>
+  </div>
+</main>
+
+<script>
+if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.body.classList.add("dark");
+if(localStorage.getItem("darkMode")==="true")document.body.classList.add("dark");
+function toggleDarkMode(){document.body.classList.toggle("dark");localStorage.setItem("darkMode",document.body.classList.contains("dark"));}
+
+fetch("header.html").then(res=>res.text()).then(html=>{
+  document.getElementById("header-container").innerHTML = html;
+});
+</script>
+
+</body>
+</html>
