@@ -296,7 +296,7 @@ function exportAllData() {
   // On prépare le payload normalisé
   const payload = {
     schema: "TidyZou-export",
-    version: 1,
+    version: CURRENT_SCHEMA_VERSION,
     exportedAt: new Date().toISOString(),
     data: {
       children: children,         // on prend l’état en mémoire
@@ -351,7 +351,9 @@ function parseExportPayload(text) {
     }
     return {
       children: data.children,
-      currentChild: typeof data.currentChild === "number" ? data.currentChild : 0
+      currentChild: typeof data.currentChild === "number" ? data.currentChild : 0,
+	  // version exportée dans le fichier, sinon 0 par défaut
+	  version: typeof obj.version === "number" ? obj.version : 0
     };
   }
 
@@ -359,7 +361,8 @@ function parseExportPayload(text) {
   if (Array.isArray(obj.children)) {
     return {
       children: obj.children,
-      currentChild: typeof obj.currentChild === "number" ? obj.currentChild : 0
+      currentChild: 0,
+      version: 0   // ancien format → on considère que ça part de la V0
     };
   }
 
@@ -377,11 +380,18 @@ function handleImportAllMerge(event) {
     const parsed = parseExportPayload(e.target.result);
     if (!parsed) return;
 
-    const importedChildren = parsed.children || [];
+    let importedChildren = parsed.children || [];
     if (!importedChildren.length) {
       alert("Aucun enfant dans le fichier à fusionner.");
       return;
     }
+
+    // On récupère la version du fichier
+    const fromVersion = typeof parsed.version === "number" ? parsed.version : 0;
+
+    // On MIGRE les enfants importés avant toute fusion
+    const { migratedChildren } = migrateChildrenIfNeeded(importedChildren, fromVersion);
+    importedChildren = migratedChildren;
 
     if (!confirm(
       "Les données du fichier vont être fusionnées avec vos enfants existants.\n" +
@@ -400,29 +410,28 @@ function handleImportAllMerge(event) {
     importedChildren.forEach((impChild) => {
       const idx = findMatchingChildIndex(impChild);
       if (idx === -1) {
-        // Nouvel enfant → on l'ajoute tel quel
+        // Nouvel enfant → on l'ajoute tel quel (déjà migré)
         children.push(impChild);
         addedCount++;
       } else {
-        // Fusion smart avec l'enfant existant
-        mergeChildData(children[idx], impChild);
+        // Fusion (mergeChildData travaille maintenant sur des objets alignés sur le schéma courant)
+        children[idx] = mergeChildData(children[idx], impChild);
         mergedCount++;
       }
     });
 
     saveChildren();
     majUI();
-    showView("vue-accueil");
 
     alert(
       "✅ Fusion terminée.\n" +
-      `- ${mergedCount} enfant(s) fusionné(s) avec des profils existants.\n` +
-      `- ${addedCount} nouvel(aux) enfant(s) ajouté(s).`
+      `- ${mergedCount} enfant(s) fusionné(s)\n` +
+      `- ${addedCount} enfant(s) ajouté(s)`
     );
   };
+
   reader.readAsText(file);
 }
-
 
 
 function handleImportAllReplace(event) {
@@ -441,7 +450,7 @@ function handleImportAllReplace(event) {
 
     children = parsed.children || [];
 // On passe les données importées dans le pipeline de migration
-const fromVersion = 0;
+const fromVersion = typeof parsed.version === "number" ? parsed.version : 0;
 const { migratedChildren, newVersion } = migrateChildrenIfNeeded(children, fromVersion);
 children = migratedChildren;
 currentChild = parsed.currentChild || 0;
