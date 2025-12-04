@@ -385,24 +385,52 @@ window.addEventListener("load", () => {
 });
 </script>
 
+<script>
+  function showUpdateBanner() {
+    const banner = document.getElementById('updateBanner');
+    const btn = document.getElementById('updateNowBtn');
+    if (!banner) return;
 
+    banner.hidden = false;
+    banner.classList.add('visible');
 
-  <!-- 🔄 Service Worker Update Notification -->
-  <script>
+    if (btn) {
+      btn.onclick = () => {
+        window.location.reload();
+      };
+    }
+  }
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').then(reg => {
       console.log('[SW] Enregistré avec succès.');
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing;
+        if (!newWorker) return;
         newWorker.addEventListener('statechange', () => {
           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            showUpdateBanner(reg);
+            // Le nouveau SW est déjà actif grâce à self.skipWaiting()
+            // On affiche juste l'info à l'utilisateur
+            showUpdateBanner();
           }
         });
       });
     }).catch(err => console.warn('[SW] Erreur d’enregistrement :', err));
   }
-  </script>
+</script>
+
+
+
+<!-- 🔄 Bandeau de mise à jour SW -->
+<div id="updateBanner" class="update-banner" hidden>
+  <span class="update-banner-text">
+    Nouvelle version disponible 🔄
+  </span>
+  <button id="updateNowBtn" type="button">
+    Mettre à jour maintenant
+  </button>
+</div>
+
 
 </body>
 </html>

@@ -1532,6 +1532,53 @@ html.device-small-phone #vue-jour .jour-btn.active {
   text-shadow: 0 0 4px rgba(255,255,255,0.8);
 }
 
+/* ===== Bandeau "Nouvelle version disponible" (SW) ===== */
+.update-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px;
+  background: #0d47a1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 9999;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+.update-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.update-banner-text {
+  flex: 1;
+  font-weight: 600;
+}
+
+#updateNowBtn {
+  background: #ffca28;
+  color: #0d47a1;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+
+#updateNowBtn:hover {
+  filter: brightness(1.05);
+}
 
 
 
