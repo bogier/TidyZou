@@ -69,6 +69,16 @@ function loadChildrenFromStorage() {
   return migratedChildren;
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+
 // v0 → v1 : pour l’instant, on se contente de normaliser à un tableau
 function migrate0to1(oldChildren) {
   if (!Array.isArray(oldChildren)) return [];
@@ -489,7 +499,7 @@ function importExample(){
     tasks:[ {name:"Ranger la chambre",weights:[1,1,1,1,1,0,0]}, {name:"Lire 10 min",weights:[1,1,1,1,1,0,0]} ],
     notes:{}, history:[]
   };
-  children.push(demo); saveChildren(); currentChild=children.length-1; majUI();
+  addChildSafely(demo); saveChildren(); currentChild=children.length-1; majUI();
 }
 
 function resetAllChildren(){
@@ -635,7 +645,7 @@ function majVueJour(){
     const name = `t${i}d${dayIdx}`;
     tbody.insertAdjacentHTML("beforeend",`
       <tr>
-        <td>${t.name}</td>
+        <td>${escapeHtml(t.name)}</td>
         <td class="rating-cell">
           <input type="radio" id="${name}v0" name="${name}" data-task="${i}" data-day="${dayIdx}" value="0" ${val==0?'checked':''} ${disable}>
           <label for="${name}v0">🔴</label>
@@ -812,12 +822,12 @@ function updateWeeklyRewardBanners(pctWeek, cfg){
   const show2 = (pctWeek >= cfg.t2) && !!cfg.r2?.trim();
 
   if (show1 && b1){
-    b1.innerHTML = `<span class="badge">Palier 1</span> ${cfg.r1} <span style="opacity:.6;font-weight:600">(${pctWeek.toFixed(1)}%)</span>`;
+    b1.innerHTML = `<span class="badge">Palier 1</span> ${escapeHtml(cfg.r1)} <span style="opacity:.6;font-weight:600">(${pctWeek.toFixed(1)}%)</span>`;
     b1.classList.remove('hidden'); b1.classList.add('palier-1','pop');
     setTimeout(()=> b1.classList.remove('pop'), 300);
   }
   if (show2 && b2){
-    b2.innerHTML = `<span class="badge">Palier 2</span> ${cfg.r2} <span style="opacity:.6;font-weight:600">(${pctWeek.toFixed(1)}%)</span>`;
+    b2.innerHTML = `<span class="badge">Palier 2</span> ${escapeHtml(cfg.r2)} <span style="opacity:.6;font-weight:600">(${pctWeek.toFixed(1)}%)</span>`;
     b2.classList.remove('hidden'); b2.classList.add('palier-2','pop');
     setTimeout(()=> b2.classList.remove('pop'), 300);
   }
@@ -1170,6 +1180,7 @@ function renderHome(){
   children.forEach((ch, idx)=>{
 
     const name = (ch?.settings?.childName || "Mon enfant").trim();
+	const safeName = escapeHtml(name);               // ✅ on ajoute ça
     const avatar = ch?.settings?.avatar || "img/default.png";
 
     const pctDay   = computeDailyForChildIdx(idx);
@@ -1179,9 +1190,9 @@ function renderHome(){
     const card = document.createElement('article');
     card.className = "child-card";
     card.innerHTML = `
-      <img class="card-avatar" src="${avatar}" alt="${name}">
+      <img class="card-avatar" src="${avatar}" alt="${safeName}">
       <div>
-        <div class="card-title">${name}</div>
+        <div class="card-title">${safeName}</div>
 
         <div class="hc-bars">
           <div class="hc-row">
@@ -1737,7 +1748,7 @@ function renderTaskList(){
   child.tasks.forEach((t, idx)=>{
     ul.insertAdjacentHTML("beforeend",`
       <li>
-        ${t.name}
+        ${escapeHtml(t.name)}
         <span>
           <button onclick="moveTask(${idx},-1)">⬆️</button>
           <button onclick="moveTask(${idx},1)">⬇️</button>
@@ -1916,9 +1927,9 @@ function majTableCustomRewards() {
     rewards.forEach((r, idx) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${week}</td>
-        <td>${r.reward}</td>
-        <td>${r.palier || "-"}</td>
+        <td>${escapeHtml(week)}</td>
+        <td>${escapeHtml(r.reward)}</td>
+        <td>${escapeHtml(r.palier || "-")}</td>
         <td><button onclick="deleteWeeklyReward('${week}', ${idx})">❌</button></td>
       `;
       tbody.appendChild(tr);
@@ -2015,6 +2026,24 @@ function updateRewardSummary() {
   reward1.oninput = () => { c.settings.rewardLow = reward1.value.trim(); saveChildren(); };
   reward2.oninput = () => { c.settings.rewardHigh = reward2.value.trim(); saveChildren(); };
 }
+function isValidChild(obj) {
+  if (typeof obj !== 'object' || obj === null) return false;
+  if (!obj.settings || typeof obj.settings.childName !== 'string') return false;
+  if (!Array.isArray(obj.tasks)) return false;
+  if (typeof obj.notes !== 'object' || obj.notes === null) return false;
+  if (!Array.isArray(obj.history)) return false;
+  return true;
+}
+
+function addChildSafely(child) {
+  if (!isValidChild(child)) {
+    console.warn("Child rejeté : schéma invalide");
+    showToast("Données enfant invalides", "var(--danger)");
+    return;
+  }
+  children.push(child);
+  saveChildren();
+}
 
 
 function renderCustomRewards() {
@@ -2027,9 +2056,9 @@ function renderCustomRewards() {
   for (const [week, data] of Object.entries(rewards)) {
     tbody.insertAdjacentHTML("beforeend", `
       <tr>
-        <td>${week}</td>
-        <td>${data.reward}</td>
-        <td>${data.palier}</td>
+        <td>${escapeHtml(week)}</td>
+        <td>${escapeHtml(data.reward)}</td>
+        <td>>${escapeHtml(data.palier)}</td>
         <td><button onclick="deleteWeeklyReward('${week}')">🗑️</button></td>
       </tr>
     `);
