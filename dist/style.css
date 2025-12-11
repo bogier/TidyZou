@@ -1,0 +1,1629 @@
+:root {
+  /* Thème global */
+  --primary: #12468B;        /* bleu foncé */
+  --primary-light: #4a90e2;  /* bleu clair */
+  --secondary: #1e63d1;      /* accent bleu */
+  --danger: #e53935;
+  --bg-light: #f7f8fb;
+  --card-bg: #fff;
+  --radius: 12px;
+  --shadow: 0 4px 10px rgba(0,0,0,0.08);
+  --font-main: 'Open Sans', Arial, sans-serif;
+  --text-color: #12468B;     /* bleu marine */
+
+  /* Radial progress – couleurs */
+  --color-jour: #1e63d1;     /* Bleu vif pour le jour */
+  --color-semaine: #2ecc71;  /* Vert pour la semaine */
+  --color-mois: #8e44ad;     /* Violet pour le mois */
+
+  /* Radial progress – images */
+  --img-jour: url("img/TidyZouSmile.png");
+  --img-semaine: url("img/TidyZouFaitLeFou.png");
+  --img-mois: url("img/TidyZouFoufou.png");
+    /* Radial progress – effets par défaut */
+  --bg-size: 50%;
+  --bg-opacity: 0.16;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: var(--font-main); background: var(--bg-light); color: var(--text-color); }
+/* Empêcher le zoom auto sur les champs (iOS / mobile) */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea {
+  font-size: 16px;   /* clé : >= 16px */
+}
+
+button { cursor:pointer; }
+img { max-width:100%; }
+
+h1,h2,h3,h4,h5,h6, p, td, th, li, button {
+  color: var(--text-color);
+}
+
+/* ========= HEADER ========= */
+.app-header {
+  display:flex; align-items:center;
+  padding:.8rem;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.app-header h1 { flex:1; text-align:center; font-size:1.1rem; }
+.menu-btn { background:none; border:none; font-size:1.6rem; color:var(--primary); }
+
+/* ========= SIDEBAR ========= */
+.sidebar {
+  position:fixed; top:0; left:0;
+  width:280px; height:100%;
+  background: linear-gradient(
+    180deg,
+    #0a2a52 0%,
+    #12468B 40%,
+    #4a90e2 100%
+  );
+  color:#fff;
+  transform:translateX(-100%);
+  transition:.3s;
+  z-index:200;
+  display:flex; flex-direction:column;
+}
+.sidebar.show { transform:translateX(0); }
+.sidebar h2 { padding:1rem; font-size:1.2rem; }
+.sidebar-grabber {
+  width:40px; height:5px;
+  background:rgba(255,255,255,0.6);
+  border-radius:3px; margin:.5rem auto;
+}
+.sidebar-content { flex:1; overflow-y:auto; }
+
+.nav-list { list-style:none; padding:0; }
+.nav-list li {
+  padding: .9rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.nav-list li:hover { background:rgba(255,255,255,.15); }
+
+.nav-list li.quick {
+  padding:.5rem 1rem;
+  font-size:.9rem;
+  opacity:0.9;
+}
+
+.avatar {
+  width:24px; height:24px;
+  border-radius:50%;
+  margin-right:.3rem;
+}
+
+/* === Enfants dans la sidebar : version nettoyée === */
+.child-accordion {
+  margin-bottom: 0.1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.child-accordion h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #fff;
+  padding: 0.35rem 0.6rem;
+  margin: 0;
+  line-height: 1.2;
+  cursor: pointer;
+  min-height: 42px;
+}
+
+.child-accordion h3 img.avatar {
+  width: 44px;
+  height: 44px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.35);
+  box-shadow: 0 0 5px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+
+.child-accordion h3 .arrow {
+  font-size: 0.9rem;
+  margin-left: auto;
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.child-accordion.open h3 .arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.child-accordion.active h3 {
+  background: rgba(255,255,255,0.18);
+  border-left: 3px solid var(--secondary);
+  box-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+
+.child-accordion.active h3 span {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+
+.child-accordion .options {
+  display: none;
+  flex-direction: column;
+  background: rgba(255,255,255,0.05);
+}
+
+.child-accordion.open .options {
+  display: flex;
+}
+
+.child-accordion .options li {
+  padding: 0.35rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #fff !important;
+  font-family: var(--font-main);
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s, transform 0.15s;
+}
+
+.child-accordion .options li:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(2px);
+}
+
+/* ✅ Forcer l’écriture en blanc dans la sidebar */
+.sidebar,
+.sidebar h2,
+.sidebar .nav-list li,
+.sidebar .nav-list li.quick{
+  color:#fff !important;
+}
+
+/* ========= VUES ========= */
+.view { display:none; padding:1rem; }
+.view.active { display:block; }
+.view-header { display:flex; justify-content:space-between; align-items:center; padding:.6rem; flex-direction:column; gap:.4rem; }
+
+/* ========= TABS ========= */
+.tabs { 
+  display:flex; 
+  gap:.4rem; 
+  justify-content:center; 
+  align-items:center; /* 🔹 pour aligner le jour avec les boutons */
+}
+.tabs button {
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  background: #e5e7eb;
+  color: var(--text-color);
+  font-size: 1.05rem;        /* ✅ taille augmentée */
+  font-weight: 600;          /* ✅ texte plus lisible */
+  letter-spacing: 0.03em;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.tabs button:hover {
+  transform: scale(1.05);    /* ✅ petit zoom au survol */
+}
+
+.table-wrapper { overflow-x:auto; }
+table {
+  width:100%; border-collapse:collapse;
+  background:var(--card-bg);
+  box-shadow:var(--shadow);
+}
+th,td {
+  border:1px solid #ddd;
+  padding:.6rem;
+  text-align:center;
+  font-size:.9rem;
+}
+thead th { background:#f1f5f9; }
+
+/* ========= CALENDRIER ========= */
+.calendar {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  flex:1;
+}
+
+/* === Boutons flèches calendrier (⬅ ➡) === */
+.calendar button {
+  background: var(--bg-light);
+  border: none;
+  color: var(--primary);
+  font-size: 2rem;                /* taille des flèches */
+  font-weight: bold;
+  cursor: pointer;
+  width: 50px;                    /* cercle */
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.22s, background 0.3s, color 0.3s;
+}
+
+.calendar button:hover {
+  transform: scale(1.15);
+  background: var(--secondary);
+  color: #fff;
+}
+
+.calendar button:active {
+  transform: scale(1.08);
+}
+
+.calendar-title p {
+  font-size: 0.85rem;
+  color: #444;
+  margin-top: 0.15rem;
+}
+
+.calendar-month {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px; padding:.5rem;
+}
+.calendar-cell {
+  background:#fff;
+  border-radius:8px;
+  min-height:40px;
+  padding:.4rem;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.calendar-cell .date {
+  position:absolute;
+  top:4px; right:6px;
+  font-size:.7rem; color:#666;
+}
+.calendar-cell .percent {
+  font-size: 0.70rem;
+  font-weight: 500;
+  margin-top: 0.7rem;
+  opacity: 0.9;
+}
+
+.calendar-cell.today {
+  background: #b6f2c0;   /* vert très clair */
+  color: #12468B;        /* texte bleu marine */
+  font-weight: bold;
+}
+
+.calendar-cell.past {
+  background: #d6eaff;   /* bleu très clair */
+  color: #12468B;        /* texte bleu marine */
+}
+
+/* ========= RESULTATS + PUZZLE ========= */
+.result-actions {
+  display:flex; justify-content:center; gap:1rem; margin-bottom:.6rem;
+}
+.result-actions button {
+  border:none; border-radius:50%;
+  width:42px; height:42px;
+  color:#fff; font-size:1.3rem;
+  background:var(--primary);
+}
+.result-actions button.delete { background:var(--danger); }
+
+.puzzle-container {
+  position:relative; display:grid;
+  width:100%; max-width:400px;
+  aspect-ratio:1/1;
+  border-radius:var(--radius);
+  overflow:hidden; margin:auto;
+  box-shadow:var(--shadow);
+}
+.puzzle-piece { background:rgba(255,255,255,.95); transition:all .6s; }
+.puzzle-piece.revealed { opacity:0; transform:scale(.9); }
+
+.progress-container {
+  width:100%; max-width:400px; height:10px;
+  background:#eee; border-radius:5px;
+  margin:1rem auto;
+}
+
+/*.progress-bar {
+  height:100%; width:0;
+  background:var(--secondary);
+  transition:width .4s;
+}
+*/
+
+/* ========= HISTORIQUE ========= */
+.row-average {
+  background:#f1f5f9;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* ========= OVERLAY ========= */
+#overlay {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  z-index:150;
+    pointer-events: none;
+  transition: background 0.3s;
+}
+#overlay.show { 
+	display:block;
+	  pointer-events: auto;
+	background: rgba(0, 0, 0, 0.3);
+	}
+
+/* ========= parametres enfants =========== */
+.param-section {
+  background: var(--card-bg);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.param-section label {
+  display:block;
+  margin-top:.5rem;
+  font-weight:bold;
+}
+
+.param-section input[type=text],
+.param-section input[type=number] {
+  width: 100%;
+  padding: .4rem;
+  margin: .3rem 0;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+}
+/* Avatars upload */
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin-top: .5rem;
+}
+
+/* Sidebar separator – version finale */
+.sidebar-separator {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Footer actions – version finale */
+.footer-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.2rem 0;
+}
+
+/* Tabs */
+.tabs button.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Calendar title */
+.calendar-title h2 {
+  font-size: 1.1rem;     /* choisir la valeur définitive */
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.calendar-title h2::before {
+  /* content: "📅"; */
+  margin-right: 0.4rem;
+  font-size: 1.1em;
+  vertical-align: middle;
+  opacity: 0.9;
+}
+
+/* Contexte Nom & Avatar – fusionné */
+#vue-nom-avatar .avatar-upload {
+  align-items: flex-start;
+  gap: 1rem;
+}
+#vue-nom-avatar .avatar-frame {
+  flex: 0 0 auto !important;
+}
+#vue-nom-avatar input[type="file"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+
+
+.task-add {
+  display:flex;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.task-add input {
+  flex:1;
+}
+
+#taskList {
+  list-style:none;
+  padding:0;
+}
+
+#taskList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .25rem 0;
+}
+
+/* 🔹 Boutons d'action (monter/descendre/supprimer) */
+#taskList li span {
+  display: flex;
+  gap: .1rem;                 /* 🔸 espace ultra-serré entre icônes */
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 0;            /* 🔸 collé à la droite */
+}
+
+/* === Task List Buttons (version finale) === */
+#taskList li button {
+  background: none;
+  color: var(--primary);
+  border: none;
+  padding: .2rem .4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform .2s, color .3s;
+}
+
+#taskList li button:hover {
+  transform: scale(1.1);
+  color: var(--secondary);
+}
+
+
+.param-actions {
+  display:flex;
+  justify-content:space-between;
+  margin-top:1rem;
+}
+.param-actions .save {
+  background: var(--primary);
+  color:#fff;
+  border:none;
+  padding:.5rem 1rem;
+  border-radius: var(--radius);
+  cursor:pointer;
+}
+
+/* ========= BOUTON RETOUR ========= */
+.back-btn {
+  background: var(--primary);
+  color: #fff !important;
+  border: none;
+  border-radius: var(--radius);
+  padding: .5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .3s;
+}
+
+.back-btn:hover {
+  background: var(--secondary);
+}
+
+/* ========= RATING CELL ========= */
+.rating-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;      /* petit espace uniforme */
+  font-size: 0.9rem; /* icônes réduites */
+}
+
+/* Inputs invisibles mais actifs */
+.rating-cell input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.rating-cell label {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 2px 6px;
+  transition: transform .2s, opacity .2s, background .2s, border .2s;
+  opacity: 0.4;              /* par défaut un peu visibles */
+  border: 2px solid transparent;
+}
+
+/* Quand coché → bien visible + fond coloré + contour gris */
+.rating-cell input[value="0"]:checked + label {
+  opacity: 1;
+  background: #fdecea;   /* rouge clair */
+  border: 2px solid #aaa;
+}
+.rating-cell input[value="0.5"]:checked + label {
+  opacity: 1;
+  background: #fff4e5;   /* orange clair */
+  border: 2px solid #aaa;
+}
+.rating-cell input[value="1"]:checked + label {
+  opacity: 1;
+  background: #e8f5e9;   /* vert clair */
+  border: 2px solid #aaa;
+}
+
+/* Effet hover */
+.rating-cell label:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+
+/* Vue Jour : variante compacte sur une ligne centrée */
+#vue-jour .rating-cell,
+#vue-semaine .rating-cell {
+  display: flex;
+  justify-content: center;   /* centrage horizontal */
+  align-items: center;
+  gap: 0.2rem;               /* petit espace homogène */
+  font-size: 0.9rem;         /* taille réduite */
+}
+
+#vue-jour .rating-cell label,
+#vue-semaine .rating-cell label {
+  padding: 0 3px;            /* espace minimal autour de l’icône */
+  display: inline-flex;      /* garder bien centré */
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-frame {
+  padding: 6px;
+  border: 2px solid #ddd;
+  border-radius: var(--radius);
+  background: #fff;
+  display: inline-block;
+  box-shadow: var(--shadow);
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-wrapper img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+}
+
+.delete-avatar-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: background .3s;
+}
+
+.delete-avatar-btn:hover {
+  background: #c62828;
+}
+
+.avatar-filename {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.4rem;
+  text-align: left;
+}
+
+/* ===== Avatars uniformisés ===== */
+/* ===== Avatars ===== */
+
+/* Petits avatars : sidebar + entêtes */
+.avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Grand avatar : vue Nom & Avatar */
+.avatar-large {
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  box-shadow: var(--shadow);
+  border: 2px solid #ddd;
+  flex: 0 0 150px; /* 🔹 empêche flexbox de rétrécir */
+}
+
+/* === FINAL AVATAR FIX === */
+
+.sidebar-link {
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: opacity .3s;
+}
+
+.sidebar-link:hover {
+  opacity: 1;
+}
+
+/* 🔹 Masque le bouton "Annuler" sur les vues Nom & Avatar, Tâches, Récompenses */
+#vue-nom-avatar .param-actions button:first-child,
+#vue-taches .param-actions button:first-child,
+#vue-recompenses .param-actions button:first-child {
+  display: none !important;
+}
+
+/* 🔹 Masque le bouton "Enregistrer" dans la vue Récompenses */
+#vue-recompenses .param-actions .save {
+  display: none !important;
+}
+
+/* ✅ Fix overlay cliquable sur la page install */
+body.install-page #overlay.show {
+  display: block;
+  z-index: 1000;            /* sous la sidebar, au-dessus du contenu */
+  pointer-events: auto;     /* permet les clics sur l’overlay */
+  background: rgba(0,0,0,0.35);
+}
+
+/* ✅ La sidebar doit rester interactive même quand l’overlay est actif */
+body.install-page .sidebar.show {
+  z-index: 1100;            /* au-dessus de l’overlay */
+  pointer-events: auto;
+}
+
+
+/* === Ajustement final du footer sidebar === */
+
+.footer-actions .sidebar-link:last-child {
+  margin-bottom: 0;       /* supprime la marge basse inutile */
+}
+
+/* === Sidebar Footer (version finale) === */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sidebar-footer .about-link,
+.sidebar-footer .install-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #fff !important;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: opacity .3s;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+}
+
+.sidebar-footer .about-link:hover,
+.sidebar-footer .install-link:hover {
+  opacity: 1;
+}
+
+/* Duo "À propos / Installer" encore plus serré */
+.sidebar-footer .about-link + .install-link {
+  margin-top: -0.25rem;
+}
+
+/* === Accordéon Paramètres (footer) === */
+#parametresAccordion {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: none;
+  margin-top: 0.5rem;
+}
+
+#parametresAccordion h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+#parametresAccordion h3:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+#parametresAccordion .arrow {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+#parametresAccordion .options {
+  display: none;
+  flex-direction: column;
+  background: rgba(255,255,255,0.05);
+  margin-top: 0.3rem;
+  border-radius: 6px;
+}
+
+#parametresAccordion.open .options {
+  display: flex;
+}
+
+/* === PAGE D’ACCUEIL === */
+#vue-accueil {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.home-hero h2 {
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+   font-size: 1.4rem;
+}
+
+.home-hero p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  max-width: 480px;
+  margin: 0 auto 1.8rem auto;
+}
+
+/* Navigation semaine sur l’accueil (bilan) */
+.home-week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.home-week-label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.week-nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+
+.week-nav-btn:active {
+  transform: scale(0.9);
+}
+
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.home-actions button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 260px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.home-actions button:hover {
+  background: var(--secondary);
+}
+
+.home-illustration {
+  max-width: 240px;
+  width: 70%;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  opacity: 0.95;
+}
+
+#customRewardsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+#customRewardsTable th, #customRewardsTable td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+#customRewardsTable th {
+  background: #f1f5f9;
+  color: var(--primary);
+  font-weight: 700;
+}
+#customRewardsTable button {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+#customRewardsTable button:hover {
+  color: #b71c1c;
+}
+
+.reward-summary.editable {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.reward-box {
+  flex: 1;
+  max-width: 200px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: left;
+  border-left: 5px solid var(--secondary);
+}
+
+.reward-box h4 {
+  color: var(--primary);
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.reward-box label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.reward-box input {
+  width: 100%;
+  margin-top: 0.2rem;
+  padding: 0.4rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 1rem;  /* 1rem = 16px si base = 16px */
+}
+
+/* ===== Progress Duo (vue-jour) ===== */
+.progress-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+.progress-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.progress-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #f2f2f2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #52b788, #40916c);
+  transition: width 220ms ease;
+}
+.progress-caption {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #444;
+}
+
+/* Petits écrans (profil détecté une fois au démarrage) */
+html.device-phone .progress-duo,
+html.device-small-phone .progress-duo {
+  grid-template-columns: 1fr;
+}
+
+/* Conteneur général : parfaitement aligné et centré */
+.radial-trio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 10px 0 18px;
+  flex-wrap: nowrap;
+}
+
+/* Chaque cercle réduit */
+.radial {
+  width: 90px;    /* 🔹 diamètre réduit */
+  height: 90px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radial svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.05));
+}
+
+/* anneau externe gris */
+.radial .outer-ring {
+  stroke: #777;
+  stroke-width: 4;
+  fill: none;
+}
+
+/* segments gris (fond) */
+.radial .seg-bg {
+  stroke: #e6e6e6;
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: butt;
+}
+
+/* segments colorés (progression) */
+.radial .seg-fill {
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: butt;
+}
+
+/* pastille centrale */
+.radial .center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* pastille blanche avec texte */
+.radial .badge {
+  width: 56px;    /* 🔹 plus petit */
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.radial .pct {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.radial .lbl {
+  font-size: 13px;
+}
+
+/* Mobile : les empile verticalement (profil figé) */
+html.device-phone .radial-trio,
+html.device-small-phone .radial-trio,
+html.device-tablet .radial-trio {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ===== Bandeau Récompense (vue Jour) ===== */
+.reward-banner{
+  margin: 8px auto 0;
+  max-width: 520px;
+  background: #fff;
+  border: 2px dashed var(--secondary);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary);
+  transform: scale(1);
+  transition: transform .25s ease, opacity .25s ease;
+}
+.reward-banner.hidden{ display:none; opacity:0; }
+.reward-banner .badge{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e8f5e9;         /* vert clair */
+  border:1px solid #b4dfb9;
+  margin-right: 6px;
+  font-weight: 800;
+}
+.reward-banner.palier-1 .badge{ background:#fff4e5; border-color:#ffd6a8; } /* orange clair */
+.reward-banner.palier-2 .badge{ background:#e8f5e9; border-color:#b4dfb9; } /* vert clair */
+.reward-banner .text{ font-weight: 700; }
+.reward-banner.pop{ transform: scale(1.03); }
+
+/* === Day Label (version finale) === */
+.day-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: capitalize;
+  margin-left: 0;
+}
+
+
+/* Onglets centrés de façon stricte et toujours sur une ligne */
+.view-header .tabs{
+  display:flex;
+  gap:.4rem;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:nowrap;        /* évite le retour à la ligne des boutons */
+}
+
+/* Optionnel : même largeur pour les deux onglets pour un centrage visuel parfait */
+.view-header .tabs .tab{
+  min-width: 84px;
+  text-align:center;
+}
+
+/* === Vue-jour : barre 7 jours === */
+.jour-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.8rem 0 1rem 0;
+  flex-wrap: nowrap;
+}
+
+.jour-btn {
+  background: #f5f5f5;
+  border: none;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  line-height: 2.2rem;
+  text-align: center;
+}
+
+.jour-btn:hover { background: #e9e9e9; }
+
+.jour-btn.active {
+  background: #1e88e5;   /* bleu */
+  color: #fff;
+  transform: scale(1.04);
+  box-shadow: 0 0 6px rgba(30, 136, 229, 0.35);
+}
+
+/* Optionnel : état disabled visuel si tu veux bloquer le clic UI (on laisse actif ici) */
+.jour-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* === Child + Day line (version finale) === */
+.child-and-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.child-and-month {
+  display: flex;
+  align-items: center;     /* aligne verticalement */
+  justify-content: center; /* centre horizontalement */
+  gap: 0.4rem;             /* petit espace entre icône et nom */
+  
+  margin-top: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+/* === Current Child (version finale) === */
+.current-child {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1f2f3f;
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* === Vue jour — centrage + marges protectrices + focus réduit === */
+#vue-jour {
+  width: 100%;
+  overflow-x: hidden; /* empêche tout dépassement horizontal */
+}
+
+#vue-jour .jour-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.4rem, 1.5vw, 0.7rem);
+
+  /* marges internes adaptatives + safe area */
+  padding-left:  calc(max(0.8rem, env(safe-area-inset-left)));
+  padding-right: calc(max(0.8rem, env(safe-area-inset-right)));
+
+  margin-inline: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+#vue-jour .jour-btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  line-height: 3.6rem;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.13em;            /* lettres plus serrées */
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+  background: transparent;
+
+  /* transitions douces */
+  transition:
+    transform 0.15s ease,
+    background-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* === État actif (sélectionné) — plus petit, plus contrasté === */
+#vue-jour .jour-btn.active {
+  transform: scale(0.95);             /* cercle légèrement plus petit */
+  background-color: var(--accent-color, #2b6cb0);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.08); /* léger liseré pour détacher */
+}
+
+/* === Hover: accent éclairci (sans grossir) === */
+@supports (color: color-mix(in oklab, white, black)) {
+  #vue-jour .jour-btn:hover:not(.active) {
+    /* éclaircit l’accent de ~15% */
+    background-color: color-mix(in oklab, var(--accent-color, #2b6cb0) 85%, white);
+    color: #fff;
+  }
+}
+/* Fallback hover si color-mix indisponible */
+@supports not (color: color-mix(in oklab, white, black)) {
+  #vue-jour .jour-btn:hover:not(.active) {
+    background-color: #4a86c5; /* proche de l’accent éclairci */
+    color: #fff;
+  }
+}
+
+/* === Active (clic): très léger assombrissement pour le tap feedback === */
+@supports (color: color-mix(in oklab, white, black)) {
+  #vue-jour .jour-btn:active {
+    background-color: color-mix(in oklab, var(--accent-color, #2b6cb0) 90%, black);
+  }
+}
+@supports not (color: color-mix(in oklab, white, black)) {
+  #vue-jour .jour-btn:active {
+    background-color: #255a8f;
+  }
+}
+
+/* === Focus visible: anneau d’accessibilité propre, sans agrandir === */
+#vue-jour .jour-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff, /* bord interne pour contraste sur fonds variés */
+    0 0 0 4px color-mix(in oklab, var(--accent-color, #2b6cb0) 70%, white);
+}
+@supports not (color: color-mix(in oklab, white, black)) {
+  #vue-jour .jour-btn:focus-visible {
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 4px rgba(43,108,176,0.6);
+  }
+}
+
+/* === Responsive : petit écran (profil figé device-small-phone) === */
+
+html.device-small-phone #vue-jour .jour-selector {
+  gap: clamp(0.3rem, 1.2vw, 0.5rem);
+  padding-left:  calc(max(0.9rem, env(safe-area-inset-left)));
+  padding-right: calc(max(0.9rem, env(safe-area-inset-right)));
+}
+
+html.device-small-phone #vue-jour .jour-btn {
+  width: 3.2rem;
+  height: 3.2rem;
+  line-height: 3.2rem;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: -0.14em;
+}
+
+html.device-small-phone #vue-jour .jour-btn.active {
+  transform: scale(0.92);
+}
+
+
+/* Respecte le réglage d’accessibilité “réduire les animations” */
+@media (prefers-reduced-motion: reduce) {
+  #vue-jour .jour-btn {
+    transition: none;
+  }
+}
+
+/* ===== Accueil : cartes récap enfant ===== */
+.home-children{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: .5rem;
+}
+
+.child-card{
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s ease;
+}
+
+
+.child-card .card-avatar{
+  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(0,0,0,.06);
+}
+
+.child-card .card-title{
+  font-weight: 700; margin-bottom: 6px; font-size: 1rem; color: var(--primary);
+}
+
+.hc-bars{ display: grid; gap: 8px; }
+.hc-row{ display: grid; grid-template-columns: 100px 1fr 52px; gap: 8px; align-items: center; }
+.hc-label{ font-size: .85rem; font-weight: 600; color: #334155; text-transform: capitalize; }
+
+.hc-bar{
+  height: 10px; background: #eef2f7; border-radius: 999px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+}
+.hc-fill{ height: 100%; width: 0%; transition: width .25s ease; }
+
+.hc-fill.day{   background: var(--color-jour,   #1e63d1); }
+.hc-fill.week{  background: var(--color-semaine,#2ecc71); }
+.hc-fill.month{ background: var(--color-mois,  #8e44ad); }
+
+.hc-pct{ font-size: .85rem; font-weight: 700; color: var(--primary); text-align: right; }
+
+.child-card:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+.child-card:focus-within { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+/* === Menus sidebar : base commune === */
+.menu-accueil,
+.menu-nom-avatar,
+.menu-taches,
+.menu-recompenses,
+.menu-exporter,
+.menu-supprimer,
+.menu-suivi-taches,
+.menu-resultats,
+.menu-parametres,
+.menu-ajouter,
+.menu-importer,
+.menu-importer-exemple,
+.menu-reset,
+.menu-purge,
+.menu-apropos,
+.menu-installer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;  /* OK même si c’est un <a> */
+  color: inherit;
+}
+
+/* Icônes de menu : style commun */
+.icon-home,
+.icon-nom-avatar,
+.icon-taches,
+.icon-recompenses,
+.icon-exporter,
+.icon-supprimer,
+.icon-suivi-taches,
+.icon-resultats,
+.icon-parametres,
+.icon-ajouter,
+.icon-importer,
+.icon-importer-exemple,
+.icon-reset,
+.icon-purge,
+.icon-apropos,
+.icon-installer {
+  height: 22px;
+  width: auto;
+  max-height: 22px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+/* Cas particulier : l’icône Accueil est plus grande */
+.icon-home {
+  height: 36px;
+  max-height: 36px;
+}
+
+/* Hover par défaut : petit zoom */
+.menu-accueil:hover .icon-home,
+.menu-nom-avatar:hover .icon-nom-avatar,
+.menu-taches:hover .icon-taches,
+.menu-recompenses:hover .icon-recompenses,
+.menu-exporter:hover .icon-exporter,
+.menu-supprimer:hover .icon-supprimer,
+.menu-suivi-taches:hover .icon-suivi-taches,
+.menu-resultats:hover .icon-resultats,
+.menu-ajouter:hover .icon-ajouter,
+.menu-importer:hover .icon-importer,
+.menu-importer-exemple:hover .icon-importer-exemple,
+.menu-apropos:hover .icon-apropos {
+  transform: scale(1.1);
+}
+
+/* Hover spéciaux : rotations / translations */
+.menu-parametres:hover .icon-parametres {
+  transform: rotate(15deg);
+}
+
+.menu-reset:hover .icon-reset {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.menu-purge:hover .icon-purge {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.menu-installer:hover .icon-installer {
+  transform: translateY(2px) scale(1.1);
+}
+
+
+@keyframes taskFlash { 0%{background:#fff7cc} 100%{background:transparent} }
+#taskList li.added { animation: taskFlash .9s ease-out; }
+
+/* Réduire la taille du texte dans le tableau de la vue Résultats */
+#vue-resultats table th,
+#vue-resultats table td {
+  font-size: 0.6rem; /* moitié de 0.9rem */
+}
+
+/* Réduire la taille de la 1ere colonne dans le tableau de la vue Résultats */
+#vue-resultats table td:nth-child(1),
+#vue-resultats table th:nth-child(1) {
+    width: 50px; 
+}
+
+/* Réduire la taille de la 2eme colonne dans le tableau de la vue Résultats */
+#vue-resultats table td:nth-child(2),
+#vue-resultats table th:nth-child(2) {
+    width: 50px; 
+}
+
+.current-child-inline {
+  font-weight: 600;
+  margin-left: .4rem;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.sidebar-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* texte à gauche, image à droite */
+    padding: 10px 0;
+}
+
+.sidebar-title h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.sidebar-logo {
+    width: 50px;      /* tu peux augmenter/diminuer */
+    height: auto;
+    margin-left: 10px;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+/* Image en transparence derrière */
+.radial::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: var(--bg-size);   /* 👈 contrôlé par JS */
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: var(--bg-opacity);        /* 👈 contrôlé par JS */
+  pointer-events: none;        /* clics passent à travers */
+}
+
+#radial-jour::after {
+  background-image: var(--img-jour);
+}
+
+#radial-semaine::after {
+  background-image: var(--img-semaine);
+}
+
+#radial-mois::after {
+  background-image: var(--img-mois);
+}
+
+.radial .center .pct,
+.radial .center .lbl {
+  color: #000;
+  font-weight: 900;
+  text-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+
+/* ===== Bandeau "Nouvelle version disponible" (SW) ===== */
+.update-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px;
+  background: #0d47a1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 9999;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+.update-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.update-banner-text {
+  flex: 1;
+  font-weight: 600;
+}
+
+#updateNowBtn {
+  background: #ffca28;
+  color: #0d47a1;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+
+#updateNowBtn:hover {
+  filter: brightness(1.05);
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+
+
+
+

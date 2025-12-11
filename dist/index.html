@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <title>TidyZou</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="app-header">
+    <button class="menu-btn" aria-label="Ouvrir le menu">&#9776;</button>
+    <h1>TidyZou </h1>
+	<img src="appli/TidyZouSmileTransparent.png" alt="TidyZou" class="sidebar-logo">
+  </header>
+
+<!-- ================= SIDEBAR ================= -->
+<nav class="sidebar" id="sidebar">
+
+<div class="sidebar-title">
+  <h2>Espace TidyZou</h2>
+  <img src="appli/TidyZouSmileTransparent.png" alt="TidyZou" class="sidebar-logo">
+</div>
+
+  <div class="sidebar-grabber"></div>
+
+  <div class="sidebar-content">
+    <ul class="nav-list">
+      <li onclick="showView('vue-accueil')" class="menu-accueil">
+        <img src="appli/accueil.PNG" alt="Accueil" class="icon-home">
+        <span>Accueil</span>
+      </li>
+
+    </ul>
+
+    <input id="importChildInput" type="file" accept="application/json" style="display:none" onchange="handleImportChild(event)">
+	<input id="importAllReplaceInput"
+       type="file"
+       accept="application/json"
+       style="display:none"
+       onchange="handleImportAllReplace(event)">
+
+    <input id="importAllMergeInput"
+       type="file"
+       accept="application/json"
+       style="display:none"
+       onchange="handleImportAllMerge(event)">
+
+    <ul id="childrenList" class="nav-list children-list"></ul>
+  </div>
+
+  <!-- ======== FOOTER AVEC ACCORDÉON PARAMÈTRES ======== -->
+  <div class="sidebar-footer">
+
+    <!-- Accordéon Paramètres -->
+    <li class="child-accordion" id="parametresAccordion">
+      <h3>
+        <span class="menu-parametres">
+         <img src="appli/parameters.PNG" alt="Paramètres" class="icon-parametres">
+         <span>Paramètres</span>
+        </span>
+
+        <span class="arrow">▼</span>
+      </h3>
+      <ul class="options">
+<li class="sidebar-link menu-ajouter" onclick="addChild()">
+  <img src="appli/AjouterEnfant.PNG" alt="Ajouter un enfant" class="icon-ajouter">
+  <span>Ajouter un enfant</span>
+</li>
+      
+<li class="sidebar-link menu-importer" onclick="document.getElementById('importChildInput').click()">
+  <img src="appli/importer.png" alt="Importer un enfant" class="icon-importer">
+  <span>Importer un enfant</span>
+</li>
+<li class="sidebar-link menu-importer-exemple" onclick="importExample()">
+  <img src="appli/importerExemple.png" alt="Importer l'exemple" class="icon-importer-exemple">
+  <span>Importer l'exemple</span>
+</li>
+<li class="sidebar-link menu-exporter" onclick="exportAllData()">
+  <img src="appli/exporter.png" alt="Exporter tout" class="icon-exporter">
+  <span>Exporter tout</span>
+</li>
+
+<li class="sidebar-link menu-importer" onclick="document.getElementById('importAllReplaceInput').click()">
+  <img src="appli/importer.png" alt="Importer tout et remplacer" class="icon-importer">
+  <span>Importer tout - remplacer</span>
+</li>
+
+<li class="sidebar-link menu-importer" onclick="document.getElementById('importAllMergeInput').click()">
+  <img src="appli/importer.png" alt="Importer tout et fusionner" class="icon-importer">
+  <span>Importer tout - fusionner</span>
+</li>
+
+<li id="btnResetChildren" class="sidebar-link menu-reset">
+  <img src="appli/ReinitialiserEnfants.PNG" alt="Réinitialiser les enfants" class="icon-reset">
+  <span>Réinitialiser les enfants</span>
+</li>
+<li id="btnPurgeAll" class="sidebar-link menu-purge">
+  <img src="appli/PurgeTotale.PNG" alt="Tout supprimer" class="icon-purge">
+  <span>Tout supprimer</span>
+</li>        
+<li>
+  <a href="about.html" class="sidebar-link menu-apropos">
+    <img src="appli/Apropos.PNG" alt="À propos" class="icon-apropos">
+    <span>À propos</span>
+  </a>
+</li>
+
+<li>
+  <a href="install.html" class="sidebar-link menu-installer">
+    <img src="appli/InstallerApplication.PNG" alt="Installer l’app" class="icon-installer">
+    <span>Installer l’app</span>
+  </a>
+</li>
+
+      </ul>
+    </li>
+
+    <hr class="sidebar-separator">
+  </div>
+</nav>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- ================= VUES ================= -->
+  
+<main class="view active" id="vue-accueil">
+  <!-- HERO d’accueil / ou juste le titre en mode recap -->
+  <section class="home-hero" id="homeHero">
+    <h2 id="homeTitle">Bienvenue dans TidyZou </h2>
+    <p id="homeSubtitle">Un jeu familial pour motiver les enfants à accomplir leurs petites missions du quotidien, 
+    suivre leurs progrès et gagner des récompenses amusantes !</p>
+    <img src="img/TidyZou_transparent.webp" alt="Illustration d'accueil" class="home-illustration" id="homeIllustration">
+  </section>
+
+  <!-- Navigation semaine (bilan accueil) -->
+  <div id="homeWeekNav" class="home-week-nav" style="display:none">
+    <button id="homePrevWeek" class="week-nav-btn" type="button">⬅</button>
+    <span id="homeWeekLabel" class="home-week-label">Semaine</span>
+    <button id="homeNextWeek" class="week-nav-btn" type="button">➡</button>
+  </div>
+
+  <!-- Liste des enfants (affichée seulement si enfants > 0) -->
+  <section class="home-children" id="homeChildren" style="display:none"></section>
+</main>
+
+  
+  <main class="view" id="vue-jour">
+    <div class="view-header">
+      <div class="calendar">
+        <button id="btnPrev">&lt;</button>
+        <div class="calendar-title"><h2 id="weekTitle">1 Octobre 2025</h2></div>
+        <button id="btnNext">&gt;</button>
+      </div>
+
+<div class="child-and-day">
+  <img 
+    src="appli/accueil.PNG" 
+    alt="Accueil" 
+    class="icon-home"
+    onclick="showView('vue-accueil')"
+  >
+  <p class="current-child" id="currentChild_day">—</p>
+</div>
+
+
+ <!-- === BARRE DE SÉLECTION DU JOUR (vue-jour) === -->
+    <div id="jour-selector" class="jour-selector">
+      <button type="button" class="jour-btn" data-day-idx="0" title="Lundi">L</button>
+      <button type="button" class="jour-btn" data-day-idx="1" title="Mardi">M</button>
+      <button type="button" class="jour-btn" data-day-idx="2" title="Mercredi">M</button>
+      <button type="button" class="jour-btn" data-day-idx="3" title="Jeudi">J</button>
+      <button type="button" class="jour-btn" data-day-idx="4" title="Vendredi">V</button>
+      <button type="button" class="jour-btn" data-day-idx="5" title="Samedi">S</button>
+      <button type="button" class="jour-btn" data-day-idx="6" title="Dimanche">D</button>
+    </div>
+    <!-- === /BARRE DE SÉLECTION DU JOUR === -->
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab(this,'vue-jour')">Jour</button>
+  <button class="tab" onclick="switchTab(this,'vue-mois')">Mois</button>
+</div>
+
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Tâche</th><th>Statut</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+<!-- ===== Indicateurs d'avancement (Jour + Semaine + Mois) ===== -->
+<div class="radial-trio">
+  <div class="radial" id="radial-jour"></div>
+  <div class="radial" id="radial-semaine"></div>
+  <div class="radial" id="radial-mois"></div>
+</div>
+
+<!-- ===== Récompenses (SEMAINE) ===== -->
+<div id="rewardBannerW1" class="reward-banner hidden" aria-live="polite"></div>
+<div id="rewardBannerW2" class="reward-banner hidden" aria-live="polite"></div>
+
+<!-- ===== / Indicateurs ===== -->
+	
+  </main>
+
+  <main class="view" id="vue-mois">
+    <div class="view-header">
+      <div class="calendar">
+        <button id="btnPrevMonth">&lt;</button>
+        <div class="calendar-title"><h2 id="monthTitle">Mois</h2></div>
+        <button id="btnNextMonth">&gt;</button>
+      </div>
+      <div class="child-and-month">
+        <img src="appli/accueil.PNG" alt="Accueil" class="icon-home" onclick="showView('vue-accueil')" >
+        <p class="current-child" id="currentChild_month">—</p>
+      </div>	  
+      <div class="tabs">
+        <button class="tab" onclick="switchTab(this,'vue-jour')">Jour</button>
+        <button class="tab active" onclick="switchTab(this,'vue-mois')">Mois</button>
+      </div>
+    </div>
+    <div class="calendar-month"></div>
+  </main>
+
+<main class="view result-view" id="vue-resultats">
+
+<div class="view-header">
+  <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
+  <h2>
+    Résultats <span id="currentChild_rewards_results" class="current-child-inline">—</span>
+  </h2>
+</div>
+
+  <!-- Historique par semaine (pour cet enfant) -->
+  <section class="result-history">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Semaine</th>
+            <th>% </th>
+            <th>Récompense</th>
+          </tr>
+        </thead>
+        <tbody id="historiqueBody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+  <main class="view" id="vue-nom-avatar">
+    <div class="view-header">
+      <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
+      <h2>Nom & Avatar</h2>
+    </div>
+    <div class="param-section">
+      <div class="avatar-frame">
+        <div class="avatar-wrapper">
+          <img id="avatarPreview" src="img/default.png" alt="Avatar" class="avatar-large">
+          <button type="button" class="delete-avatar-btn" onclick="deleteAvatar()">🗑️</button>
+        </div>
+      </div>
+      <input type="file" id="inputAvatar" accept="image/*">
+      <p id="avatarFileName" class="avatar-filename">Avatar par défaut</p>
+      <label for="inputChildName">Nom de l’enfant :</label>
+      <input type="text" id="inputChildName" placeholder="Entrez le prénom">
+      <label for="inputChildAge">Âge :</label>
+      <input type="number" id="inputChildAge" min="0" max="20" placeholder="Entrez l’âge">
+      <label>Genre :</label>
+      <div class="gender-options">
+        <label><input type="radio" name="childGender" value="fille"> Fille</label>
+        <label><input type="radio" name="childGender" value="garçon"> Garçon</label>
+        <label><input type="radio" name="childGender" value="non-defini" checked> Non défini</label>
+      </div>
+    </div>
+    <div class="param-actions">
+      <button onclick="majUI()">❌ Annuler</button>
+    </div>
+  </main>
+
+  <main class="view" id="vue-taches">
+    <div class="view-header">
+      <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
+      <h2>Gestion des tâches</h2>
+	  <p class="current-child" id="currentChild_tasks">—</p>
+    </div>
+    <div class="param-section">
+      <div class="task-add">
+        <input type="text" id="newTaskName" placeholder="Nouvelle tâche">
+        <button class="save" onclick="addTask()">➕ Ajouter</button>
+      </div>
+      <ul id="taskList"></ul>
+    </div>
+    <div class="param-actions">
+      <button onclick="majUI()">❌ Annuler</button>
+    </div>
+  </main>
+
+  <main class="view" id="vue-recompenses">
+    <div class="view-header">
+      <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
+      <h2>Récompenses</h2>
+	  <p class="current-child" id="currentChild_rewards">—</p>
+    </div>
+   
+<!-- 🔹 Paliers modifiables directement -->
+<div class="reward-summary editable">
+  <div class="reward-box">
+    <h4>Palier 1</h4>
+    <label>Seuil (%) :</label>
+    <input type="number" id="summaryThreshold1" min="0" max="100" step="1">
+    <label>Récompense :</label>
+    <input type="text" id="summaryReward1" placeholder="Ex : Choisir un dessin animé">
+  </div>
+  <div class="reward-box">
+    <h4>Palier 2</h4>
+    <label>Seuil (%) :</label>
+    <input type="number" id="summaryThreshold2" min="0" max="100" step="1">
+    <label>Récompense :</label>
+    <input type="text" id="summaryReward2" placeholder="Ex : Sortie au parc">
+  </div>
+</div>
+
+
+	<!-- 🔹 Récompenses personnalisées -->
+<div class="param-section">
+  <h5>Récompenses personnalisées par semaine</h5>
+  <label for="customWeek">Semaine (numéro-année) :</label>
+  <input type="text" id="customWeek" placeholder="Ex : 42-2025">
+
+  <label for="customReward">Récompense :</label>
+  <input type="text" id="customReward" placeholder="Ex : Sortie cinéma">
+
+  <label for="customPalier">Palier :</label>
+  <select id="customPalier">
+    <option value="Palier 1">Palier 1</option>
+    <option value="Palier 2">Palier 2</option>
+    <option value="-">Autre</option>
+  </select>
+
+  <button class="save" onclick="addWeeklyReward()">➕ Ajouter</button>
+</div>
+
+<table id="customRewardsTable">
+  <thead>
+    <tr><th>Semaine</th><th>Récompense</th><th>Palier</th><th></th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+    <div class="param-actions">
+      <button onclick="majUI()">❌ Annuler</button>
+      <button class="save" onclick="saveRewards()">💾 Enregistrer</button>
+    </div>
+	<div id="toast" class="toast"></div>
+  </main>
+
+  <!-- ================= JS ================= -->
+  <script src="index.js"></script>
+
+<!-- ✅ Vérification simple sans double attachement -->
+<script>
+window.addEventListener("load", () => {
+  const resetBtn = document.getElementById("btnResetChildren");
+  const purgeBtn = document.getElementById("btnPurgeAll");
+
+  if (resetBtn) {
+    console.log("✅ Bouton 'Réinitialiser les enfants' détecté dans le DOM.");
+  } else {
+    console.warn("⚠️ Bouton 'Réinitialiser les enfants' introuvable.");
+  }
+
+  if (purgeBtn) {
+    console.log("✅ Bouton 'Purge totale' détecté dans le DOM.");
+  } else {
+    console.warn("⚠️ Bouton 'Purge totale' introuvable.");
+  }
+});
+</script>
+
+<script>
+  function showUpdateBanner() {
+    const banner = document.getElementById('updateBanner');
+    const btn = document.getElementById('updateNowBtn');
+    if (!banner) return;
+
+    banner.hidden = false;
+    banner.classList.add('visible');
+
+    if (btn) {
+      btn.onclick = () => {
+        window.location.reload();
+      };
+    }
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').then(reg => {
+      console.log('[SW] Enregistré avec succès.');
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (!newWorker) return;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // Le nouveau SW est déjà actif grâce à self.skipWaiting()
+            // On affiche juste l'info à l'utilisateur
+            showUpdateBanner();
+          }
+        });
+      });
+    }).catch(err => console.warn('[SW] Erreur d’enregistrement :', err));
+  }
+</script>
+
+
+
+<!-- 🔄 Bandeau de mise à jour SW -->
+<div id="updateBanner" class="update-banner" hidden>
+  <span class="update-banner-text">
+    Nouvelle version disponible 🔄
+  </span>
+  <button id="updateNowBtn" type="button">
+    Mettre à jour maintenant
+  </button>
+</div>
+
+
+</body>
+</html>
