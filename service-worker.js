@@ -10,8 +10,6 @@ const PRECACHE_ASSETS = [
   './index.html',
   './about.html',
   './install.html',
-  './purge.html',
-
   // CSS / JS avec les bons query params
   './style.css',
   './index.js',
