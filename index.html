@@ -130,10 +130,6 @@
 <!-- Overlay -->
 <div id="overlay"></div>
 
-
-  <!-- Overlay -->
-  <div id="overlay"></div>
-
   <!-- ================= VUES ================= -->
   
 <main class="view active" id="vue-accueil">
@@ -370,61 +366,6 @@
 
   <!-- ================= JS ================= -->
   <script src="index.js"></script>
-
-<!-- ✅ Vérification simple sans double attachement -->
-<script>
-window.addEventListener("load", () => {
-  const resetBtn = document.getElementById("btnResetChildren");
-  const purgeBtn = document.getElementById("btnPurgeAll");
-
-  if (resetBtn) {
-    console.log("✅ Bouton 'Réinitialiser les enfants' détecté dans le DOM.");
-  } else {
-    console.warn("⚠️ Bouton 'Réinitialiser les enfants' introuvable.");
-  }
-
-  if (purgeBtn) {
-    console.log("✅ Bouton 'Purge totale' détecté dans le DOM.");
-  } else {
-    console.warn("⚠️ Bouton 'Purge totale' introuvable.");
-  }
-});
-</script>
-
-<script>
-  function showUpdateBanner() {
-    const banner = document.getElementById('updateBanner');
-    const btn = document.getElementById('updateNowBtn');
-    if (!banner) return;
-
-    banner.hidden = false;
-    banner.classList.add('visible');
-
-    if (btn) {
-      btn.onclick = () => {
-        window.location.reload();
-      };
-    }
-  }
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(reg => {
-      console.log('[SW] Enregistré avec succès.');
-      reg.addEventListener('updatefound', () => {
-        const newWorker = reg.installing;
-        if (!newWorker) return;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            // Le nouveau SW est déjà actif grâce à self.skipWaiting()
-            // On affiche juste l'info à l'utilisateur
-            showUpdateBanner();
-          }
-        });
-      });
-    }).catch(err => console.warn('[SW] Erreur d’enregistrement :', err));
-  }
-</script>
-
 
 
 <!-- 🔄 Bandeau de mise à jour SW -->

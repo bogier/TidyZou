@@ -27,7 +27,7 @@ self.addEventListener('install', (event) => {
     try {
       const cache = await caches.open(STATIC_CACHE);
       await cache.addAll(PRECACHE_ASSETS);
-      console.log(`[SW] ${SW_VERSION} installé (app shell précaché).`);
+      console.log("[SW] Installé (app shell précaché).")
     } catch (e) {
       console.warn('[SW] Erreur pendant le pré-cache :', e);
     }
@@ -43,7 +43,7 @@ self.addEventListener('activate', (event) => {
     const keys = await caches.keys();
     await Promise.all(
       keys
-        .filter(k => k.startsWith('TidyZou-static-') && k !== STATIC_CACHE)
+        .filter(k => k.startsWith('TidyZou-static') && k !== STATIC_CACHE)
         .map(k => caches.delete(k))
     );
     await self.clients.claim();
