@@ -1667,3 +1667,20 @@ html.device-small-phone #vue-jour .jour-btn.active {
   top: 38%;
   right: 5%;
 }
+
+/* === Podium MOIS : 1er plus haut que sur l'accueil === */
+#vue-mois .podium-avatar.first{
+  top: -7%;   /* AVANT : 28% (accueil) */
+}
+
+/* === Podium MOIS : 2e et 3e plus hauts === */
+#vue-mois .podium-avatar.second{
+  top: 7%;   /* AVANT : 36% */
+}
+
+/* === Podium MOIS : 3e un peu plus à gauche === */
+#vue-mois .podium-avatar.third{
+  top: 14%;
+  right: 10%;   /* AVANT : 5% */
+}
+
