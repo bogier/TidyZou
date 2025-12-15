@@ -1623,7 +1623,47 @@ html.device-small-phone #vue-jour .jour-btn.active {
   margin: 0;
 }
 
+.home-podiums { margin: 16px 0; }
 
+.podium-title { text-align: center; margin: 10px 0 12px; }
 
+.podium-visual {
+  position: relative;
+  max-width: 520px;   /* ajuste selon ton design */
+  margin: 0 auto;
+}
 
+.podium-bg { width: 100%; display: block; }
 
+/* Avatars */
+.podium-avatar{
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,.95);
+  background: #fff;
+  display: none; /* caché si pas de gagnant */
+}
+
+/* 🥇 1er au milieu */
+.podium-avatar.first{
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+}
+
+/* 🥈 2e à gauche */
+.podium-avatar.second{
+  top: 36%;
+  left: 8%;
+}
+
+/* 🥉 3e à droite */
+.podium-avatar.third{
+  top: 38%;
+  right: 5%;
+}
