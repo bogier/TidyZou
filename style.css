@@ -1683,4 +1683,11 @@ html.device-small-phone #vue-jour .jour-btn.active {
   top: 14%;
   right: 10%;   /* AVANT : 5% */
 }
+/* 🚫 Suppression du bouton Retour sur certaines vues */
+#vue-nom-avatar .back-btn,
+#vue-taches .back-btn,
+#vue-recompenses .back-btn,
+#vue-resultats .back-btn {
+  display: none !important;
+}
 
