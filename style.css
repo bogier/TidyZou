@@ -466,6 +466,8 @@ thead th { background:#f1f5f9; }
 }
 .task-add input {
   flex:1;
+  text-align: left;     /* ✅ FIX DÉFINITIF */
+  direction: ltr;
 }
 
 #taskList {
@@ -481,13 +483,23 @@ thead th { background:#f1f5f9; }
 }
 
 /* 🔹 Boutons d'action (monter/descendre/supprimer) */
-#taskList li span {
+#taskList li .task-actions{
   display: flex;
-  gap: .1rem;                 /* 🔸 espace ultra-serré entre icônes */
   align-items: center;
   justify-content: flex-end;
-  margin-right: 0;            /* 🔸 collé à la droite */
+  gap: 0;
 }
+
+/* Flèches très proches de la corbeille */
+#taskList li .task-actions .task-move{
+  margin-right: -12px;   /* 🔹 rapproche visuellement */
+}
+
+/* Corbeille légèrement mise en avant */
+#taskList li .task-actions .task-delete{
+  margin-left: 0;
+}
+
 
 /* === Task List Buttons (version finale) === */
 #taskList li button {
@@ -1691,3 +1703,24 @@ html.device-small-phone #vue-jour .jour-btn.active {
   display: none !important;
 }
 
+/* Fix alignement saisie nouvelle tâche */
+#newTaskName{
+  text-align: left !important;
+  direction: ltr;
+}
+
+/* Fix alignement libellé des tâches (liste) */
+#taskList .task-name{
+  text-align: left !important;
+  direction: ltr;
+}
+
+#taskList .task-weight{
+  width: 54px;           /* compact */
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;       /* clé : réduit la largeur visuelle */
+  letter-spacing: -1px;  /* compacte les étoiles */
+}
