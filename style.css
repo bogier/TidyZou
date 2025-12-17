@@ -1723,4 +1723,5 @@ html.device-small-phone #vue-jour .jour-btn.active {
   text-align: center;
   font-size: 12px;       /* clé : réduit la largeur visuelle */
   letter-spacing: -1px;  /* compacte les étoiles */
+  
 }
