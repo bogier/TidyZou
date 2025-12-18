@@ -1716,12 +1716,34 @@ html.device-small-phone #vue-jour .jour-btn.active {
 }
 
 #taskList .task-weight{
-  width: 54px;           /* compact */
+  width: 50px;           /* compact */
   padding: 4px 6px;
   border: 1px solid #ccc;
   border-radius: 8px;
   text-align: center;
   font-size: 12px;       /* clé : réduit la largeur visuelle */
   letter-spacing: -1px;  /* compacte les étoiles */
-  
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+/* Pondération par couleur */
+#taskList .task-weight.weight-1 {
+  color: #9ca3af;        /* gris – faible */
+}
+
+#taskList .task-weight.weight-2 {
+  color: #60a5fa;        /* bleu clair */
+}
+
+#taskList .task-weight.weight-3 {
+  color: #2563eb;        /* bleu standard */
+}
+
+#taskList .task-weight.weight-4 {
+  color: #1e40af;        /* bleu foncé */
+}
+
+#taskList .task-weight.weight-5 {
+  color: #0f172a;        /* quasi noir – très fort */
 }
