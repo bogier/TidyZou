@@ -1725,6 +1725,10 @@ html.device-small-phone #vue-jour .jour-btn.active {
   letter-spacing: -1px;  /* compacte les étoiles */
   color: var(--text-color);
   font-weight: 700;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+#taskList .task-weight:focus {
+  transform: scale(1.05);
 }
 
 /* Pondération par couleur */
@@ -1747,3 +1751,8 @@ html.device-small-phone #vue-jour .jour-btn.active {
 #taskList .task-weight.weight-5 {
   color: #0f172a;        /* quasi noir – très fort */
 }
+#vue-jour .weight-1 { color: #9ca3af; }
+#vue-jour .weight-2 { color: #60a5fa; }
+#vue-jour .weight-3 { color: #2563eb; }
+#vue-jour .weight-4 { color: #1e40af; }
+#vue-jour .weight-5 { color: #0f172a; }
