@@ -1756,3 +1756,25 @@ html.device-small-phone #vue-jour .jour-btn.active {
 #vue-jour .weight-3 { color: #2563eb; }
 #vue-jour .weight-4 { color: #1e40af; }
 #vue-jour .weight-5 { color: #0f172a; }
+
+/* ===== Vue Résultats : lisibilité renforcée ===== */
+/* ===== Vue Résultats : lisibilité ajustée ===== */
+#vue-resultats {
+  font-size: 0.98rem; /* très léger + par rapport au global */
+}
+
+#vue-resultats h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#vue-resultats table th {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+#vue-resultats table td {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
