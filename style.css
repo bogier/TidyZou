@@ -1716,7 +1716,7 @@ html.device-small-phone #vue-jour .jour-btn.active {
 }
 
 #taskList .task-weight{
-  width: 50px;           /* compact */
+  width: 49px;           /* compact */
   padding: 4px 6px;
   border: 1px solid #ccc;
   border-radius: 8px;
