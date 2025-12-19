@@ -277,11 +277,6 @@ thead th { background:#f1f5f9; }
   margin-top: 0.15rem;
 }
 
-.calendar-month {
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:4px; padding:.5rem;
-}
 .calendar-cell {
   background:#fff;
   border-radius:8px;
@@ -847,8 +842,12 @@ body.install-page .sidebar.show {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  margin: 0.5rem 0 1rem;
+  position: relative;
+  z-index: 50;
+  margin-top: -0.2rem;   /* 🔼 remonte la ligne dates */
+  margin-bottom: 0.6rem;
 }
+
 
 .home-week-label {
   font-weight: 600;
@@ -898,6 +897,14 @@ body.install-page .sidebar.show {
   border-radius: 12px;
   box-shadow: var(--shadow);
   opacity: 0.95;
+}
+
+/* ✅ Le podium ne doit pas intercepter les clics */
+.home-podiums,
+.podium-visual,
+.podium-bg,
+.podium-avatar{
+  pointer-events: none;
 }
 
 #customRewardsTable {
@@ -1635,15 +1642,26 @@ html.device-small-phone #vue-jour .jour-btn.active {
   margin: 0;
 }
 
-.home-podiums { margin: 16px 0; }
+/* Vue Mois : descendre le podium + avatars */
+#vue-mois .home-podiums{
+  margin-top: 1.2rem;     /* ajuste : 0.8 / 1.2 / 1.6 */
+  margin-bottom: 0.8rem;  /* on ne touche pas aux cartes */
+}
 
-.podium-title { text-align: center; margin: 10px 0 12px; }
+
+.podium-title { 
+  text-align: center; 
+  margin-top: 0.2rem;    /* 🔼 remonte le libellé */
+  margin-bottom: 0.6rem;
+}
+
 
 .podium-visual {
   position: relative;
-  max-width: 520px;   /* ajuste selon ton design */
-  margin: 0 auto;
+  max-width: 520px;
+  margin: -60px auto 0; /* 🔼 remonte seulement le pavé podium */
 }
+
 
 .podium-bg { width: 100%; display: block; }
 
@@ -1776,5 +1794,105 @@ html.device-small-phone #vue-jour .jour-btn.active {
 #vue-resultats table td {
   font-size: 1rem;
   font-weight: 500;
+}
+
+/* ❌ Supprimer les onglets Jour / Mois dans la vue Jour */
+#vue-jour .tabs {
+  display: none !important;
+}
+
+#vue-jour .view-header {
+  padding-bottom: 0.2rem;
+}
+
+.home-title-line{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+}
+
+/* ===== Accueil : titre + select alignés ===== */
+
+.home-title-line {
+  display: flex;
+  align-items: baseline; /* clé pour alignement texte */
+  gap: 12px;
+}
+
+/* Titre "Bilan" */
+#homeTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Wrapper pour afficher un indicateur de sélection */
+.home-select-wrap{
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  padding-right: 16px;      /* place pour le chevron */
+}
+
+/* Le select reste “texte” */
+#homePeriodSelect {
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+
+  color: var(--primary);
+  background: transparent;
+  border: none;
+  padding: 0;
+  padding-right: 16px;
+
+  cursor: pointer;
+
+  /* 🔥 SUPPRESSION TOTALE DU SELECT NATIF */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+
+/* Chevron indicateur */
+.home-select-caret{
+  position: absolute;
+  right: 0;
+  bottom: 0.05em;           /* ajuste l’alignement avec la baseline */
+  font-size: 0.9em;
+  opacity: 0.65;
+  pointer-events: none;     /* ne bloque pas le clic sur le select */
+}
+
+/* Petit feedback au survol */
+.home-select-wrap:hover .home-select-caret{
+  opacity: 1;
+}
+
+/* 🔥 Supprime la flèche native sur Edge / IE */
+#homePeriodSelect::-ms-expand {
+  display: none;
+}
+
+/* 🚫 Vue Mois : masquer les boutons Jour / Mois */
+#vue-mois .tabs {
+  display: none !important;
+}
+
+#vue-mois .home-children{
+  margin-top: 0;
+}
+
+/* Vue Mois : coller les cartes au podium (le podium a du "vide" en bas) */
+#vue-mois #monthPodiumSection{
+  margin-bottom: -10px !important; /* ajuste : -12 / -18 / -26 */
+}
+
+#vue-mois #monthChildren{
+  margin-top: 0 !important;
 }
 

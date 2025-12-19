@@ -135,7 +135,19 @@
 <main class="view active" id="vue-accueil">
   <!-- HERO d’accueil / ou juste le titre en mode recap -->
   <section class="home-hero" id="homeHero">
-    <h2 id="homeTitle">Bienvenue dans TidyZou </h2>
+  <div class="home-title-line">
+    <h2 id="homeTitle">Bilan</h2>
+
+<div class="home-select-wrap">
+  <select id="homePeriodSelect" aria-label="Période du bilan">
+    <option value="week">Semaine</option>
+    <option value="month">Mois</option>
+  </select>
+  <span class="home-select-caret" aria-hidden="true">▾</span>
+</div>
+
+  </div>
+  
     <p id="homeSubtitle">Un jeu familial pour motiver les enfants à accomplir leurs petites missions du quotidien, 
     suivre leurs progrès et gagner des récompenses amusantes !</p>
     <img src="img/TidyZou_transparent.webp" alt="Illustration d'accueil" class="home-illustration" id="homeIllustration">
@@ -150,8 +162,6 @@
 
   <!-- === Podium Accueil (Semaine) === -->
   <section class="home-podiums" id="homePodiums" style="display:none">
-    <h3 class="podium-title">Podium des gagnants (semaine)</h3>
-
     <div class="podium-visual" id="podium-week">
       <!-- ⚠️ Mets ton fichier image ici (ex: img/Podium1_Transparent.png) -->
       <img src="img/Podium1_Transparent.png" class="podium-bg" alt="Podium semaine">
@@ -236,7 +246,6 @@
         <button id="btnNextMonth">&gt;</button>
       </div>
       <div class="child-and-month">
-        <img src="appli/accueil.PNG" alt="Accueil" class="icon-home" onclick="showView('vue-accueil')" >
         <p class="current-child" id="currentChild_month">—</p>
       </div>	  
       <div class="tabs">
@@ -244,12 +253,8 @@
         <button class="tab active" onclick="switchTab(this,'vue-mois')">Mois</button>
       </div>
     </div>
-    <div class="calendar-month"></div>
 	  <!-- === Podium du mois === -->
   <section class="home-podiums" id="monthPodiumSection">
-
-    <h3 class="podium-title">Podium des gagnants (mois)</h3>
-
     <div class="podium-visual" id="podium-month">
       <img src="img/Podium2_Transparent.png" class="podium-bg" alt="Podium mois">
 
@@ -259,6 +264,10 @@
     </div>
 
   </section>
+  
+  <!-- Liste des enfants (vue Mois) -->
+<section class="home-children" id="monthChildren" style="display:none"></section>
+
 
   </main>
 
