@@ -1387,7 +1387,12 @@ html.device-small-phone #vue-jour .jour-btn.active {
 }
 
 .hc-bars{ display: grid; gap: 8px; }
-.hc-row{ display: grid; grid-template-columns: 100px 1fr 52px; gap: 8px; align-items: center; }
+.hc-row{
+  display: grid;
+  grid-template-columns: 88px 1fr auto; /* label un peu moins large, valeur auto */
+  gap: 6px;
+  align-items: center;
+}
 .hc-label{ font-size: .85rem; font-weight: 600; color: #334155; text-transform: capitalize; }
 
 .hc-bar{
@@ -1400,7 +1405,15 @@ html.device-small-phone #vue-jour .jour-btn.active {
 .hc-fill.week{  background: var(--color-semaine,#2ecc71); }
 .hc-fill.month{ background: var(--color-mois,  #8e44ad); }
 
-.hc-pct{ font-size: .85rem; font-weight: 700; color: var(--primary); text-align: right; }
+.hc-pct{
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;              /* 🔥 empêche "pts" de passer à la ligne */
+  font-variant-numeric: tabular-nums; /* 🔥 chiffres alignés proprement */
+  text-align: left;                 /* lecture plus naturelle */
+  justify-self: end;                /* reste collé à droite de la carte */
+}
 
 .child-card:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
 .child-card:focus-within { outline: 2px solid var(--secondary); outline-offset: 2px; }
