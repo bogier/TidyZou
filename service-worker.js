@@ -2,14 +2,14 @@
    Mode OFFLINE FULL - App Shell / Cache-first
    
 */
-const STATIC_CACHE = `TidyZou-static`;
+const STATIC_CACHE = `TidyZou-static-no-install`;
+
 
 // 🔧 À adapter si tu changes les versions de tes assets (v=3.6, v=3.7, etc.)
 const PRECACHE_ASSETS = [
   './',
   './index.html',
   './about.html',
-  './install.html',
   // CSS / JS avec les bons query params
   './style.css',
   './index.js',

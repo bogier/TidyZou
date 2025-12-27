@@ -3,17 +3,62 @@
 <head>
   <meta charset="utf-8"/>
   <title>TidyZou</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes"/>
   <meta name="mobile-web-app-capable" content="yes"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="stylesheet" href="style.css"/>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 
+<!-- 1️⃣ Instrumentation PERF + erreurs -->
+  <script>
+  (function () {
+    const t0 = performance.now();
+    window.__perf = { t0, marks: {} };
+
+    function mark(name) {
+      window.__perf.marks[name] = performance.now();
+    }
+
+    window.addEventListener("error", (e) => {
+      console.log("[JS_ERROR]", e.message, e.filename, e.lineno, e.colno);
+    });
+
+    window.addEventListener("unhandledrejection", (e) => {
+      console.log(
+        "[PROMISE_REJECTION]",
+        (e.reason && e.reason.message) || e.reason
+      );
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      mark("domcontentloaded");
+      console.log(
+        "[PERF] DOMContentLoaded",
+        (performance.now() - t0).toFixed(1),
+        "ms"
+      );
+    });
+
+    window.addEventListener("load", () => {
+      mark("load");
+      console.log(
+        "[PERF] load",
+        (performance.now() - t0).toFixed(1),
+        "ms"
+      );
+    });
+  })();
+  </script>
+
 </head>
 
 <body>
 
+  <div id="app"></div>
+  <!-- 2️⃣ TON BUNDLE (esbuild / obfusqué ou non) -->
+  <script src="bundle.js"></script>
+  
   <!-- ================= HEADER ================= -->
   <header class="app-header">
     <button class="menu-btn" aria-label="Ouvrir le menu">&#9776;</button>
@@ -110,13 +155,6 @@
   <a href="about.html" class="sidebar-link menu-apropos">
     <img src="appli/Apropos.PNG" alt="À propos" class="icon-apropos">
     <span>À propos</span>
-  </a>
-</li>
-
-<li>
-  <a href="install.html" class="sidebar-link menu-installer">
-    <img src="appli/InstallerApplication.PNG" alt="Installer l’app" class="icon-installer">
-    <span>Installer l’app</span>
   </a>
 </li>
 
