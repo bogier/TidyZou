@@ -1434,6 +1434,7 @@ html.device-small-phone #vue-jour .jour-btn.active {
 .menu-reset,
 .menu-purge,
 .menu-apropos,
+.menu-langues,
 .menu-installer {
   display: flex;
   align-items: center;
@@ -1484,6 +1485,7 @@ html.device-small-phone #vue-jour .jour-btn.active {
 .menu-resultats:hover .icon-resultats,
 .menu-ajouter:hover .icon-ajouter,
 .menu-importer:hover .icon-importer,
+.menu-langues:hover .icon-langues,
 .menu-importer-exemple:hover .icon-importer-exemple,
 .menu-apropos:hover .icon-apropos {
   transform: scale(1.1);
@@ -1909,3 +1911,9 @@ html.device-small-phone #vue-jour .jour-btn.active {
   margin-top: 0 !important;
 }
 
+.sidebar-icon-img{
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
