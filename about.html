@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ℹ️ À propos – TidyZou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#1976D2"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css?v=3.6">
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
+      color: #0D47A1;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      margin-top: 24px;
+    }
+
+    h1, h2, h3 {
+      color: #0D47A1;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+
+    p {
+      margin: .4rem 0 .8rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    ul li {
+      margin-bottom: 4px;
+    }
+
+    a {
+      color: #1976D2;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #E3F2FD;
+      border: 1px solid #BBDEFB;
+      font-size: .85rem;
+    }
+
+    .pill span {
+      white-space: nowrap;
+    }
+
+    .magic-divider {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #1976D2, #42A5F5, #64B5F6);
+      margin: 1.5rem 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        border-radius: 0;
+        margin-top: 0;
+      }
+
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: #F5F7FF;
+      border-radius: 12px;
+      padding: .9rem 1rem;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.08);
+      border: 1px solid rgba(129,140,248,0.3);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: .4rem;
+    }
+
+    .card ul {
+      margin-top: .3rem;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+      margin-top: .5rem;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: .4rem .5rem;
+      border-bottom: 1px solid #E0E7FF;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .data-table th {
+      font-weight: 700;
+      white-space: nowrap;
+      color: #1E3A8A;
+    }
+
+    .data-table code {
+      font-size: .8rem;
+      background: #EEF2FF;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .highlight {
+      background: #E3F2FD;
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      font-size: .9rem;
+    }
+
+    .highlight strong {
+      color: #0D47A1;
+    }
+
+    .warning {
+      background: #FFF7ED;
+      border-left: 4px solid #FB923C;
+      padding: .6rem .8rem;
+      border-radius: 8px;
+      font-size: .9rem;
+      margin-top: .7rem;
+    }
+
+    .warning strong {
+      color: #C2410C;
+    }
+
+    .small {
+      font-size: .85rem;
+      color: #475569;
+    }
+
+    .section-footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: .9rem;
+    }
+	/* On s'assure que le header sert de conteneur de positionnement */
+	header.app-header {
+	position: relative;
+	}
+
+/* On centre le titre TidyZou au milieu du header sur cette page */
+	header.app-header h1 {
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%, -50%);
+	  margin: 0;              /* pour éviter tout décalage parasite */
+	  text-align: center;
+	white-space: nowrap;    /* pour éviter un retour à la ligne chelou */
+	}
+/* Bouton menu reste à gauche comme avant */
+header.app-header .menu-btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo fixé à droite */
+header.app-header .sidebar-logo {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;        /* ajuste si nécessaire */
+  width: auto;
+  z-index: 2;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- === HEADER IDENTIQUE À L’APPLICATION === -->
+<header class="app-header">
+  <button class="menu-btn" aria-label="Retour à l’accueil"
+          onclick="window.location.href='index.html'">
+    &#9776;
+  </button>
+
+  <h1>TidyZou</h1>
+
+  <img src="appli/TidyZouSmileTransparent.png"
+       alt="TidyZou"
+       class="sidebar-logo">
+</header>
+
+  <main>
+
+    <h1>ℹ️ À propos de TidyZou</h1>
+    <p>
+      <strong>TidyZou</strong> est une mini-application familiale qui transforme les tâches du quotidien
+      en petit jeu suivi par semaine. L’idée : donner de la visibilité aux enfants,
+      garder une trace des efforts, et décider calmement des récompenses.
+    </p>
+
+    <div class="tag-list">
+      <span class="pill"><span>Suivi des missions</span></span>
+      <span class="pill"><span>Multi-enfants</span></span>
+    </div>
+
+    <div class="magic-divider"></div>
+
+    <section>
+      <h2>1. Comment fonctionne TidyZou ?</h2>
+
+      <div class="grid">
+        <div>
+          <h3>Un tableau de missions sur 3 vues</h3>
+          <ul>
+            <li><strong>Vue Jour</strong> : tu suis la journée en cours, mission par mission.</li>
+            <li><strong>Vue Semaine</strong> : vision globale de la semaine, avec les petits ronds de couleur.</li>
+            <li><strong>Vue Mois</strong> : vue calendrier pour voir les semaines qui se passent bien… ou moins bien.</li>
+          </ul>
+          <p class="small">
+            Sous le capot, TidyZou calcule des pourcentages par jour, par semaine et par mois à partir des notes
+            de chaque mission. Les ronds et barres de progression sont juste une visualisation de ces scores.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Échelle des “ronds”</h3>
+          <ul>
+            <li>🔴 0 : mission non faite</li>
+            <li>🟡 0,5 : à moitié / approximatif</li>
+            <li>🟢 1 : mission validée</li>
+          </ul>
+          <p class="small">
+            Ces valeurs sont stockées sous forme de nombres dans une matrice <code>[tâche][jour]</code> par semaine.
+          </p>
+        </div>
+      </div>
+
+      <h3>Récompenses &amp; paliers</h3>
+      <p>
+        Pour chaque enfant, tu peux définir deux paliers (Palier&nbsp;1 et Palier&nbsp;2) avec :
+      </p>
+      <ul>
+        <li>un <strong>seuil (%)</strong> à atteindre sur la semaine ;</li>
+        <li>un texte de <strong>récompense</strong> (ex. “choisir le film du soir”, “sortie au parc”…).</li>
+      </ul>
+      <p>
+        Tu peux aussi définir des <strong>récompenses personnalisées par semaine</strong> (ex. “semaine 42-2025”)
+        pour adapter la carotte à une période précise.
+      </p>
+
+      <div class="card">
+        <h3>Suivi &amp; historique</h3>
+        <ul>
+          <li>Calcul automatique des <strong>pourcentages jour/semaine/mois</strong>.</li>
+          <li>Historique des semaines avec moyenne globale.</li>
+          <li>Récap d’accueil qui affiche le “bilan” de la semaine en cours.</li>
+        </ul>
+      </div>
+
+      <div class="grid" style="margin-top:1.2rem;">
+        <div class="card">
+          <h3>Import / Export</h3>
+          <ul>
+            <li><strong>Exporter un enfant</strong> au format JSON.</li>
+            <li><strong>Exporter toutes les données</strong> (tous les enfants + enfant courant) dans un seul fichier.</li>
+            <li><strong>Importer tout – remplacer</strong> : remplace les données actuelles par celles du fichier.</li>
+            <li><strong>Importer tout – fusionner</strong> : merge intelligent basé sur le prénom/âge/genre.</li>
+          </ul>
+          <p class="small">
+            Tous les exports sont de simples fichiers JSON que tu peux transmettre toi-même
+            (mail, clé USB, messagerie…) entre appareils.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Maintenance &amp; reset</h3>
+          <ul>
+            <li><strong>Réinitialiser les enfants</strong> : supprime tous les enfants mais laisse l’app intacte.</li>
+            <li><strong>Purge totale</strong> : supprime toutes les données TidyZou stockées dans ton navigateur.</li>
+          </ul>
+          <p class="warning">
+            <strong>Attention :</strong> la purge est définitive. Après ça, l’app repart comme neuve
+            (un enfant de démo peut être recréé).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="magic-divider"></div>
+
+    <section>
+      <h2>3. Données, stockage local &amp; vie privée</h2>
+
+      <p>
+        TidyZou a été conçu volontairement <strong>sans serveur</strong> : tout se passe
+        <strong>dans ton navigateur</strong>.
+      </p>
+
+      <div class="highlight">
+        <strong>En clair :</strong> les données restent sur ton appareil (localStorage du navigateur).
+        Rien n’est envoyé à un serveur distant, il n’y a pas de tracking, pas de pub, pas d’analytics caché.
+      </div>
+
+      <h3>Où sont stockées les données&nbsp;?</h3>
+      <p>
+        L’application utilise principalement le stockage local du navigateur (<code>localStorage</code>)
+        avec les clés suivantes :
+      </p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Clé</th>
+            <th>Contenu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>children</code></td>
+            <td>
+              Tableau des enfants et de toutes leurs données :
+              <ul>
+                <li><strong>settings</strong> : nom, avatar (image en base64), âge, genre, paliers &amp; récompenses.</li>
+                <li><strong>tasks</strong> : liste des tâches et leurs poids par jour.</li>
+                <li><strong>notes</strong> : notes des missions par semaine.</li>
+                <li><strong>history</strong> : historique des semaines (scores, récompenses obtenues).</li>
+                <li><strong>rewardsByWeek</strong> : éventuelles récompenses personnalisées par semaine.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><code>TIDYZOU_SCHEMA_VERSION</code></td>
+            <td>Version interne du schéma de données (pour les futures migrations).</td>
+          </tr>
+          <tr>
+            <td><code>purged</code></td>
+            <td>Flag utilisé pour éviter de recréer automatiquement un enfant de démo après une purge totale.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="small">
+        L’idée est de rester sur des données minimalistes, adaptées à un usage familial et local.
+        Tu es libre de n’utiliser que des <strong>pseudonymes</strong> (ex. “Enfant 1”, “Enfant 2”…).
+      </p>
+
+      <h3>Comment supprimer mes données&nbsp;?</h3>
+      <ul>
+        <li>
+          <strong>Depuis l’application :</strong> via le menu “Paramètres” &gt;
+          <em>Réinitialiser les enfants</em> ou <em>Tout supprimer (purge totale)</em>.
+        </li>
+        <li>
+          <strong>Depuis le navigateur :</strong> tu peux aussi vider le stockage du site
+          (effacer les données de navigation / stockage local pour ce domaine).
+        </li>
+      </ul>
+    </section>
+
+    <div class="magic-divider"></div>
+
+    <section>
+      <h2>4. Mode hors-ligne </h2>
+
+      <p>
+        TidyZou <strong>fonctionne hors-ligne.</strong>
+      </p>
+
+      <ul>
+        <li>Les éventuelles mises à jour sont téléchargées en arrière-plan automatiquement.</li>
+      </ul>
+
+      <p class="small">
+        L’app ne fait pas d’appels vers des API externes pour ton contenu : le service worker gère uniquement
+        les fichiers du site lui-même. Les données des enfants restent dans ton navigateur.
+      </p>
+    </section>
+
+    <div class="magic-divider"></div>
+
+    <section class="section-footer">
+      <p class="small">
+        TidyZou est pensé comme un petit bac à sable pour tester des idées d’interface,
+        de gamification et d’outils familiaux, en gardant les données vraiment chez toi.
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>
