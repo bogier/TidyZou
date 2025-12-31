@@ -2,7 +2,7 @@
    Mode OFFLINE FULL - App Shell / Cache-first
    
 */
-const STATIC_CACHE = `TidyZou-static-no-install`;
+const STATIC_CACHE = `TidyZou-static-2025-12-31-2030`;
 
 
 // 🔧 À adapter si tu changes les versions de tes assets (v=3.6, v=3.7, etc.)

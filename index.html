@@ -155,6 +155,11 @@
   <span data-i18n="menu.languages">Langues</span>
 </li>
 
+<li class="sidebar-link menu-notifications" onclick="showView('vue-notifications')">
+  <img src="appli/Langues_2.PNG" class="sidebar-icon-img" alt="">
+  <span>Notifications</span>
+</li>
+
        
 <li>
   <a href="about.html" class="sidebar-link menu-apropos">
@@ -391,8 +396,9 @@
   <main class="view" id="vue-recompenses">
     <div class="view-header">
       <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
-      <h2>Récompenses</h2>
+	  <h2>Récompenses</h2>
 	  <p class="current-child" id="currentChild_rewards">—</p>
+	  <button onclick="testNativeNotification()">🔔 Notification</button>
     </div>
    
 <!-- 🔹 Paliers modifiables directement -->
@@ -446,6 +452,31 @@
     </div>
 	<div id="toast" class="toast"></div>
   </main>
+
+<main class="view" id="vue-notifications">
+  <div class="view-header">
+    <button onclick="openMenu()" class="back-btn">⬅ Retour</button>
+    <h2>Notifications</h2>
+  </div>
+
+  <div class="param-section">
+    <label style="display:flex;align-items:center;gap:.6rem;margin:12px 0;">
+      <input type="checkbox" id="notifEnabled">
+      <span>Activer les notifications</span>
+    </label>
+
+    <label style="display:flex;flex-direction:column;gap:.4rem;margin:12px 0;">
+      <span>Heure</span>
+      <input type="time" id="notifTime" value="19:00">
+    </label>
+
+    <button id="btnNotifTest" type="button">Tester une notification</button>
+
+    <p style="opacity:.7;margin-top:10px">
+      (Sur navigateur web, ça peut être limité. Sur l’app Capacitor, c’est fiable.)
+    </p>
+  </div>
+</main>
 
   <!-- ================= JS ================= -->
   <script src="index.js"></script>
