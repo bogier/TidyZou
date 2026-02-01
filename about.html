@@ -255,96 +255,176 @@ header.app-header .sidebar-logo {
 
     <h1>ℹ️ À propos de TidyZou</h1>
     <p>
-      <strong>TidyZou</strong> est une mini-application familiale qui transforme les tâches du quotidien
-      en petit jeu suivi par semaine. L’idée : donner de la visibilité aux enfants,
-      garder une trace des efforts, et décider calmement des récompenses.
+      <strong>TidyZou</strong> est une appli (PWA + app mobile via Capacitor) pensée pour transformer les tâches du quotidien
+      en un jeu clair, mesurable et (un peu) irrésistible. L’idée : moins de négociations floues, plus de visibilité,
+      et des récompenses décidées sur des faits.
     </p>
 
     <div class="tag-list">
-      <span class="pill"><span>Suivi des missions</span></span>
-      <span class="pill"><span>Multi-enfants</span></span>
+      <span class="pill"><span>Multi‑enfants</span></span>
+      <span class="pill"><span>Vues Jour / Semaine / Mois</span></span>
+      <span class="pill"><span>Navigation flèches</span></span>
+      <span class="pill"><span>Progression &amp; radials</span></span>
+      <span class="pill"><span>Récompenses &amp; paliers</span></span>
+      <span class="pill"><span>Hors‑ligne</span></span>
+      <span class="pill"><span>100% local</span></span>
     </div>
 
     <div class="magic-divider"></div>
 
     <section>
-      <h2>1. Comment fonctionne TidyZou ?</h2>
+      <h2>1. Ce que tu peux faire avec TidyZou</h2>
 
       <div class="grid">
         <div>
-          <h3>Un tableau de missions sur 3 vues</h3>
+          <h3>Gestion des enfants (multi-profils)</h3>
           <ul>
-            <li><strong>Vue Jour</strong> : tu suis la journée en cours, mission par mission.</li>
-            <li><strong>Vue Semaine</strong> : vision globale de la semaine, avec les petits ronds de couleur.</li>
-            <li><strong>Vue Mois</strong> : vue calendrier pour voir les semaines qui se passent bien… ou moins bien.</li>
+            <li>Ajouter plusieurs enfants et basculer d’un profil à l’autre depuis le menu.</li>
+            <li>Personnaliser <strong>Nom</strong>, <strong>Avatar</strong>, <strong>Âge</strong> et <strong>Genre</strong>.</li>
+            <li>Upload avatar avec garde-fous : max <strong>5 Mo</strong>, redimensionnement auto en <strong>200×200</strong>, stockage en base64.</li>
+            <li>Importer un <strong>enfant de démo</strong> pour tester rapidement.</li>
           </ul>
-          <p class="small">
-            Sous le capot, TidyZou calcule des pourcentages par jour, par semaine et par mois à partir des notes
-            de chaque mission. Les ronds et barres de progression sont juste une visualisation de ces scores.
-          </p>
+
+          <h3>Gestion des tâches</h3>
+          <ul>
+            <li>Ajouter / supprimer des tâches (Enter = ajouter rapide).</li>
+            <li>Réordonner les tâches (drag / boutons selon appareil).</li>
+            <li>Définir un <strong>poids</strong> (importance) par tâche, utilisé dans les calculs de points.</li>
+          </ul>
+
+          <h3>Navigation &amp; ergonomie</h3>
+          <ul>
+            <li>Sidebar avec liste des enfants + accordéon “Paramètres”.</li>
+            <li>Navigation par flèches <strong>← →</strong> pour changer de semaine (et de mois en vue Mois).</li>
+            <li>Profil “device” appliqué au démarrage (classes <code>device-*</code>) pour adapter l’UI selon téléphone/tablette/desktop.</li>
+          </ul>
+
+          <h3>Suivi au quotidien</h3>
+          <ul>
+            <li><strong>Vue Jour</strong> : liste des tâches du jour avec statut (ronds).</li>
+            <li>Sélecteur rapide <strong>L M M J V S D</strong> pour naviguer dans la semaine affichée.</li>
+            <li>Barre de progression journalière en % + affichage <strong>points faits / points possibles</strong>.</li>
+          </ul>
         </div>
 
         <div class="card">
-          <h3>Échelle des “ronds”</h3>
+          <h3>Échelle de validation (les “ronds”)</h3>
           <ul>
-            <li>🔴 0 : mission non faite</li>
-            <li>🟡 0,5 : à moitié / approximatif</li>
-            <li>🟢 1 : mission validée</li>
+            <li>🔴 <strong>0</strong> : non fait</li>
+            <li>🟡 <strong>0,5</strong> : fait à moitié / OK-ish</li>
+            <li>🟢 <strong>1</strong> : validé</li>
           </ul>
           <p class="small">
-            Ces valeurs sont stockées sous forme de nombres dans une matrice <code>[tâche][jour]</code> par semaine.
+            Ces valeurs sont stockées dans les notes hebdomadaires, et alimentent tous les calculs (jour/semaine/mois).
           </p>
         </div>
-      </div>
-
-      <h3>Récompenses &amp; paliers</h3>
-      <p>
-        Pour chaque enfant, tu peux définir deux paliers (Palier&nbsp;1 et Palier&nbsp;2) avec :
-      </p>
-      <ul>
-        <li>un <strong>seuil (%)</strong> à atteindre sur la semaine ;</li>
-        <li>un texte de <strong>récompense</strong> (ex. “choisir le film du soir”, “sortie au parc”…).</li>
-      </ul>
-      <p>
-        Tu peux aussi définir des <strong>récompenses personnalisées par semaine</strong> (ex. “semaine 42-2025”)
-        pour adapter la carotte à une période précise.
-      </p>
-
-      <div class="card">
-        <h3>Suivi &amp; historique</h3>
-        <ul>
-          <li>Calcul automatique des <strong>pourcentages jour/semaine/mois</strong>.</li>
-          <li>Historique des semaines avec moyenne globale.</li>
-          <li>Récap d’accueil qui affiche le “bilan” de la semaine en cours.</li>
-        </ul>
       </div>
 
       <div class="grid" style="margin-top:1.2rem;">
         <div class="card">
-          <h3>Import / Export</h3>
+          <h3>Vues “Bilan” + podiums</h3>
           <ul>
-            <li><strong>Exporter un enfant</strong> au format JSON.</li>
-            <li><strong>Exporter toutes les données</strong> (tous les enfants + enfant courant) dans un seul fichier.</li>
-            <li><strong>Importer tout – remplacer</strong> : remplace les données actuelles par celles du fichier.</li>
-            <li><strong>Importer tout – fusionner</strong> : merge intelligent basé sur le prénom/âge/genre.</li>
+            <li>Écran d’accueil “<strong>Bilan</strong>” avec un sélecteur <strong>Semaine / Mois</strong>.</li>
+            <li>Podium <strong>semaine</strong> (top 3) basé sur les scores.</li>
+            <li>Podium <strong>mois</strong> (top 3) en vue Mois.</li>
+            <li>Listes d’enfants cliquables pour aller vite au bon profil.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Suivi &amp; historique</h3>
+          <ul>
+            <li>Calcul automatique des <strong>points</strong> et des <strong>%</strong> sur Jour / Semaine / Mois.</li>
+            <li>Vue <strong>Résultats</strong> : historique des semaines (points + récompense).</li>
+            <li>Ligne de <strong>moyenne</strong> (utile pour voir la tendance).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:1.2rem;">
+        <div class="card">
+          <h3>Récompenses &amp; paliers</h3>
+          <ul>
+            <li>Deux paliers (Palier 1 / Palier 2) avec <strong>seuils en points</strong> + texte de récompense.</li>
+            <li>Bandeaux “Palier 1/2” qui s’affichent automatiquement quand les seuils sont atteints.</li>
+            <li><strong>Récompenses personnalisées par semaine</strong> (par palier), pour adapter la carotte au contexte.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Puzzle (gamification)</h3>
+          <ul>
+            <li>Puzzle progressif qui se révèle au fur et à mesure de la progression.</li>
+            <li>Upload d’une image de puzzle et possibilité de la supprimer.</li>
+            <li>Animation de révélation (fade / scale) pour le côté “wah”.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:1.2rem;">
+        <div class="card">
+          <h3>Notifications (app mobile)</h3>
+          <ul>
+            <li>Vue “Notifications” : activer/désactiver + choisir une <strong>heure</strong>.</li>
+            <li>Bouton “Tester une notification”.</li>
+            <li>Sur mobile (Capacitor), programmation quotidienne + canal Android dédié.</li>
+            <li>Mode <strong>self-healing</strong> : si une notif disparaît, l’app peut la reprogrammer au relaunch/resume.</li>
           </ul>
           <p class="small">
-            Tous les exports sont de simples fichiers JSON que tu peux transmettre toi-même
-            (mail, clé USB, messagerie…) entre appareils.
+            Sur navigateur web, les notifications peuvent être limitées selon le support du navigateur.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:1.2rem;">
+        <div class="card">
+          <h3>Import / Export (backup &amp; transfert)</h3>
+          <ul>
+            <li><strong>Exporter un enfant</strong> (JSON).</li>
+            <li><strong>Exporter tout</strong> (tous les enfants) dans un seul fichier JSON.</li>
+            <li><strong>Importer tout – remplacer</strong> : remplace entièrement les données locales.</li>
+            <li><strong>Importer tout – fusionner</strong> : merge “intelligent” pour récupérer des profils sans tout écraser.</li>
+            <li><strong>Importer un enfant</strong> (depuis un fichier JSON).</li>
+          </ul>
+          <p class="small">
+            Les exports sont de simples fichiers JSON : tu peux les déplacer comme tu veux (mail, clé USB, etc.).
           </p>
         </div>
 
         <div class="card">
           <h3>Maintenance &amp; reset</h3>
           <ul>
-            <li><strong>Réinitialiser les enfants</strong> : supprime tous les enfants mais laisse l’app intacte.</li>
-            <li><strong>Purge totale</strong> : supprime toutes les données TidyZou stockées dans ton navigateur.</li>
+            <li><strong>Réinitialiser les enfants</strong> : supprime tous les profils enfants.</li>
+            <li><strong>Purge totale</strong> : supprime toutes les données TidyZou stockées localement.</li>
           </ul>
           <p class="warning">
-            <strong>Attention :</strong> la purge est définitive. Après ça, l’app repart comme neuve
-            (un enfant de démo peut être recréé).
+            <strong>Attention :</strong> la purge est définitive sur cet appareil.
+            Pense à exporter avant si tu veux garder une sauvegarde.
           </p>
         </div>
+      </div>
+    </section>
+
+    <div class="magic-divider"></div>
+
+    <section>
+      <h2>2. Comment sont calculés les scores</h2>
+
+      <p>
+        TidyZou ne “note” pas l’enfant : il additionne des <strong>points pondérés</strong>.
+        Chaque tâche a un poids (importance). Ensuite, chaque jour, la tâche vaut :
+        <strong>0</strong>, <strong>0,5</strong> ou <strong>1</strong> fois ce poids.
+      </p>
+
+      <ul>
+        <li>Les totaux hebdo/mensuels sont calculés à partir des tâches et des notes enregistrées.</li>
+        <li>Les paliers (récompenses) se comparent en <strong>points</strong> (pas juste en %).</li>
+        <li>Les barres / radials ne sont que la visualisation de ces points (jour/semaine/mois).</li>
+      </ul>
+
+      <div class="highlight">
+        <strong>Pro-tip parent :</strong> mets un poids plus fort sur “devoirs” que sur “ranger le manteau”,
+        et tu obtiens une gamification qui ressemble plus à la vraie vie 😅.
       </div>
     </section>
 
@@ -354,19 +434,18 @@ header.app-header .sidebar-logo {
       <h2>3. Données, stockage local &amp; vie privée</h2>
 
       <p>
-        TidyZou a été conçu volontairement <strong>sans serveur</strong> : tout se passe
-        <strong>dans ton navigateur</strong>.
+        TidyZou est conçu <strong>sans serveur</strong> : tout se passe <strong>sur ton appareil</strong>.
+        Pas de compte, pas de pub, pas d’analytics caché. Tes données restent chez toi.
       </p>
 
       <div class="highlight">
-        <strong>En clair :</strong> les données restent sur ton appareil (localStorage du navigateur).
-        Rien n’est envoyé à un serveur distant, il n’y a pas de tracking, pas de pub, pas d’analytics caché.
+        <strong>En clair :</strong> les données sont stockées dans le <code>localStorage</code> du navigateur / WebView.
+        Rien n’est envoyé à un serveur distant par l’app pour tes enfants.
       </div>
 
-      <h3>Où sont stockées les données&nbsp;?</h3>
-      <p>
-        L’application utilise principalement le stockage local du navigateur (<code>localStorage</code>)
-        avec les clés suivantes :
+      <h3>Où sont stockées les données ?</h3>
+      <p class="small">
+        La structure exacte peut évoluer (d’où une clé de version de schéma), mais aujourd’hui les principales clés sont :
       </p>
 
       <table class="data-table">
@@ -380,19 +459,31 @@ header.app-header .sidebar-logo {
           <tr>
             <td><code>children</code></td>
             <td>
-              Tableau des enfants et de toutes leurs données :
+              Tableau des profils enfants et de leurs données :
               <ul>
-                <li><strong>settings</strong> : nom, avatar (image en base64), âge, genre, paliers &amp; récompenses.</li>
-                <li><strong>tasks</strong> : liste des tâches et leurs poids par jour.</li>
-                <li><strong>notes</strong> : notes des missions par semaine.</li>
-                <li><strong>history</strong> : historique des semaines (scores, récompenses obtenues).</li>
-                <li><strong>rewardsByWeek</strong> : éventuelles récompenses personnalisées par semaine.</li>
+                <li><strong>settings</strong> : nom, avatar (base64), âge, genre, paliers &amp; récompenses.</li>
+                <li><strong>tasks</strong> : liste des tâches + poids.</li>
+                <li><strong>notes</strong> : notes par semaine (matrice des validations).</li>
+                <li><strong>history</strong> : historique (scores hebdo, récompenses obtenues).</li>
+                <li><strong>rewardsByWeek</strong> : récompenses personnalisées par semaine.</li>
               </ul>
             </td>
           </tr>
           <tr>
             <td><code>TIDYZOU_SCHEMA_VERSION</code></td>
-            <td>Version interne du schéma de données (pour les futures migrations).</td>
+            <td>Version interne du schéma de données (actuellement 2).</td>
+          </tr>
+          <tr>
+            <td><code>TIDYZOU_NOTIF_ENABLED</code></td>
+            <td>Flag d’activation des notifications (app mobile).</td>
+          </tr>
+          <tr>
+            <td><code>TIDYZOU_NOTIF_TIME</code></td>
+            <td>Heure configurée (ex. <code>18:00</code>).</td>
+          </tr>
+          <tr>
+            <td><code>TIDYZOU_NOTIF_NEXT_AT</code></td>
+            <td>Prochaine date planifiée (epoch ms) pour la notif quotidienne.</td>
           </tr>
           <tr>
             <td><code>purged</code></td>
@@ -401,40 +492,55 @@ header.app-header .sidebar-logo {
         </tbody>
       </table>
 
-      <p class="small">
-        L’idée est de rester sur des données minimalistes, adaptées à un usage familial et local.
-        Tu es libre de n’utiliser que des <strong>pseudonymes</strong> (ex. “Enfant 1”, “Enfant 2”…).
-      </p>
-
-      <h3>Comment supprimer mes données&nbsp;?</h3>
+      <h3>Comment supprimer mes données ?</h3>
       <ul>
-        <li>
-          <strong>Depuis l’application :</strong> via le menu “Paramètres” &gt;
-          <em>Réinitialiser les enfants</em> ou <em>Tout supprimer (purge totale)</em>.
-        </li>
-        <li>
-          <strong>Depuis le navigateur :</strong> tu peux aussi vider le stockage du site
-          (effacer les données de navigation / stockage local pour ce domaine).
-        </li>
+        <li><strong>Depuis l’app :</strong> menu → <em>Réinitialiser les enfants</em> ou <em>Tout supprimer</em>.</li>
+        <li><strong>Depuis le navigateur :</strong> effacer les données du site (stockage local).</li>
       </ul>
+
+      <p class="small">
+        Astuce : tu peux utiliser des <strong>pseudonymes</strong> (“Enfant 1”, “Enfant 2”…).
+        L’app n’a pas besoin de noms réels pour fonctionner.
+      </p>
     </section>
 
     <div class="magic-divider"></div>
 
     <section>
-      <h2>4. Mode hors-ligne </h2>
+      <h2>4. Hors-ligne, mises à jour &amp; installation</h2>
 
       <p>
-        TidyZou <strong>fonctionne hors-ligne.</strong>
+        TidyZou fonctionne <strong>hors-ligne</strong> grâce à un <strong>service worker</strong> (cache des fichiers de l’app).
       </p>
 
       <ul>
-        <li>Les éventuelles mises à jour sont téléchargées en arrière-plan automatiquement.</li>
+        <li>Les mises à jour peuvent être récupérées en arrière-plan et proposées via un bandeau “Nouvelle version disponible” (bouton “Mettre à jour maintenant”).</li>
+        <li>En PWA, tu peux l’installer sur l’écran d’accueil (expérience “app”).</li>
       </ul>
 
       <p class="small">
-        L’app ne fait pas d’appels vers des API externes pour ton contenu : le service worker gère uniquement
-        les fichiers du site lui-même. Les données des enfants restent dans ton navigateur.
+        Important : le service worker met en cache l’application (les fichiers), pas tes données (qui restent dans le stockage local).
+      </p>
+    </section>
+
+    <div class="magic-divider"></div>
+
+    <section>
+      <h2>5. Langue</h2>
+
+      <p>
+        TidyZou est actuellement <strong>disponible en français uniquement</strong>.
+        Une section “Langue” existe déjà dans l’app pour préparer le terrain : l’objectif est de pouvoir basculer l’interface
+        (menus, libellés, textes de récompenses, etc.) dès que les traductions seront prêtes.
+      </p>
+
+      <ul>
+        <li>Pour l’instant : <strong>FR</strong> only ✅</li>
+        <li>Plus tard : sélecteur de langue + textes traduits sans toucher à tes données</li>
+      </ul>
+
+      <p class="small">
+        Les données (tâches, validations, scores, historique) ne dépendent pas de la langue : changer de langue ne doit pas casser tes profils.
       </p>
     </section>
 
@@ -442,10 +548,135 @@ header.app-header .sidebar-logo {
 
     <section class="section-footer">
       <p class="small">
-        TidyZou est pensé comme un petit bac à sable pour tester des idées d’interface,
-        de gamification et d’outils familiaux, en gardant les données vraiment chez toi.
+        TidyZou est un terrain de jeu sérieux : gamification, UX et offline-first, mais sans te voler tes données.
+        Objectif final : une ambiance familiale plus chill… et une salle de bain plus clean 🧼✨.
       </p>
     </section>
+	
+	    <div class="magic-divider"></div>
+
+    <section>
+      <h2>6. Cadre juridique</h2>
+
+      <h3>Données personnelles & conformité RGPD</h3>
+      <p>
+        TidyZou fonctionne selon un principe <strong>100&nbsp;% local</strong>.
+        Aucune donnée personnelle n’est transmise, collectée, analysée ou exploitée
+        par un serveur externe.
+      </p>
+
+      <ul>
+        <li>Les données sont stockées exclusivement sur l’appareil de l’utilisateur.</li>
+        <li>Aucune donnée n’est envoyée à des tiers, ni utilisée à des fins commerciales.</li>
+        <li>Aucune exploitation extérieure des données n’est techniquement possible via l’application.</li>
+      </ul>
+
+      <p>
+        Ce mode de fonctionnement respecte les principes du
+        <strong>Règlement Général sur la Protection des Données (RGPD)</strong>,
+        notamment la minimisation des données, la confidentialité
+        et la maîtrise totale par l’utilisateur.
+      </p>
+
+      <p class="small">
+        L’utilisateur reste seul responsable de la gestion, de la sauvegarde
+        et de la suppression de ses données locales.
+      </p>
+
+      <h3>Propriété intellectuelle</h3>
+      <p>
+        L’ensemble des développements logiciels, du code source,
+        de l’architecture, des concepts fonctionnels et des éléments associés
+        est la <strong>propriété exclusive</strong> de :
+      </p>
+
+      <p>
+        <strong>AIPlayground SASU</strong><br>
+        Société par actions simplifiée unipersonnelle<br>
+        Siège social : Castries (34160), Hérault (45), France
+      </p>
+
+      <p>
+        AIPlayground SASU est titulaire de l’intégralité des droits de propriété
+        intellectuelle relatifs à l’application TidyZou et à ses développements.
+      </p>
+
+      <h3>Restrictions d’usage</h3>
+      <p>
+        Toute reproduction, copie, modification, adaptation, diffusion ou altération,
+        totale ou partielle, des développements, sans autorisation écrite préalable
+        d’AIPlayground SASU, est strictement interdite.
+      </p>
+
+      <p>
+        Toute utilisation non autorisée pourra faire l’objet de poursuites judiciaires.
+      </p>
+
+      <h3>Droit applicable et juridiction compétente</h3>
+      <p>
+        Le présent cadre juridique est régi par le <strong>droit français</strong>.
+      </p>
+
+      <p>
+        En cas de litige, le <strong>Tribunal judiciaire de Montpellier (France)</strong>
+        sera seul compétent.
+      </p>
+    </section>
+
+<div class="magic-divider"></div>
+
+<section>
+  <h2>7. Licence d’utilisation</h2>
+
+  <p>
+    L’application <strong>TidyZou</strong> est mise à disposition de l’utilisateur
+    dans le cadre d’une <strong>licence d’utilisation personnelle, non exclusive,
+    non transférable et non cessible</strong>.
+  </p>
+
+  <p>
+    Cette licence confère à l’utilisateur un <strong>droit d’usage strict</strong>
+    de l’application, à l’exclusion de tout droit de propriété intellectuelle.
+  </p>
+
+  <h3>Restrictions</h3>
+  <p>
+    Toute modification, adaptation, décompilation, reproduction, diffusion,
+    extraction ou réutilisation, totale ou partielle, de l’application,
+    de son code, de son architecture ou de ses fonctionnalités,
+    est <strong>strictement interdite sans accord écrit préalable
+    d’AIPlayground SASU</strong>.
+  </p>
+
+  <h3>Condition d’abonnement</h3>
+  <p>
+    La licence d’utilisation est <strong>conditionnée au paiement
+    d’un abonnement mensuel</strong> d’un montant de
+    <strong>1,99&nbsp;€ TTC</strong>.
+  </p>
+
+  <p>
+    En cas d’absence de paiement ou de suspension de l’abonnement :
+  </p>
+
+  <ul>
+    <li>l’accès à l’application est <strong>bloqué</strong>;</li>
+    <li>les données locales de l’utilisateur <strong>ne sont pas supprimées</strong>;</li>
+    <li>les données restent conservées sur l’appareil de l’utilisateur.</li>
+  </ul>
+
+  <p>
+    L’accès à l’ensemble des fonctionnalités et aux données existantes
+    est <strong>rétabli automatiquement</strong> dès la régularisation
+    de l’abonnement.
+  </p>
+
+  <p class="small">
+    AIPlayground SASU se réserve le droit de faire évoluer les conditions
+    de la licence, sous réserve d’en informer l’utilisateur.
+  </p>
+</section>
+
 
   </main>
 
