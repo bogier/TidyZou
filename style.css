@@ -1911,6 +1911,82 @@ html.device-small-phone #vue-jour .jour-btn.active {
   margin-top: 0 !important;
 }
 
+/* =======================
+   VUE : LANGUES
+   ======================= */
+
+#vue-langues .hint{
+  opacity:.75;
+  font-weight:600;
+  margin: 8px 0 12px;
+}
+
+#vue-langues .lang-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:14px;
+  margin-top:10px;
+}
+
+#vue-langues .lang-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  font-weight:700;
+  user-select:none;
+}
+
+#vue-langues .lang-card .flag{
+  font-size:26px;
+  line-height:1;
+}
+
+#vue-langues .lang-card .lang-name{
+  flex:1;
+  text-align:left;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#vue-langues .lang-card input[type="checkbox"]{
+  width:18px;
+  height:18px;
+}
+
+#vue-langues .lang-card.active{
+  border-color:#2b6df6;
+  box-shadow:0 0 0 2px rgba(43,109,246,.15);
+}
+
+#vue-langues .lang-card.disabled{
+  opacity:.45;
+  filter:grayscale(1);
+  cursor:not-allowed;
+}
+
+#vue-langues .lang-card.disabled input{
+  cursor:not-allowed;
+}
+
+#vue-langues .lang-note{
+  margin-top:12px;
+  opacity:.7;
+  font-weight:600;
+}
+
+/* Chinois traditionnel : texte légèrement plus petit */
+#vue-langues .lang-card[data-lang="zh-Hant"] .lang-name{
+  font-size: 0.9em;
+  letter-spacing: 0.02em; /* optionnel mais souvent plus lisible */
+}
+
+
 .sidebar-icon-img{
   width: 22px;
   height: 22px;

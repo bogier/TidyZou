@@ -477,6 +477,73 @@
   </div>
 </main>
 
+<!-- =======================
+     VUE : LANGUES
+     ======================= -->
+<main class="view" id="vue-langues" aria-labelledby="langues-title">
+  <div class="view-header">
+    <button class="back-btn" type="button" onclick="showView('vue-accueil')">
+      ⬅ <span data-i18n="common.back">Retour</span>
+    </button>
+
+    <h2 id="langues-title" data-i18n="languages.title">Langues</h2>
+  </div>
+
+  <section class="param-section">
+    <p class="hint" data-i18n="languages.subtitle">
+      Choisis la langue de l’application
+    </p>
+
+    <div class="lang-grid" role="group" aria-label="Sélection de langue">
+      <!-- Français (actif) -->
+      <label class="lang-card active" aria-label="Français (actif)">
+        <span class="flag" aria-hidden="true">🇫🇷</span>
+        <span class="lang-name">Français</span>
+        <input type="checkbox" checked aria-label="Français sélectionné" />
+      </label>
+
+      <!-- Anglais -->
+      <label class="lang-card disabled" aria-label="English (bientôt disponible)">
+        <span class="flag" aria-hidden="true">🇬🇧</span>
+        <span class="lang-name">English</span>
+        <input type="checkbox" disabled aria-label="English indisponible" />
+      </label>
+
+      <!-- Espagnol -->
+      <label class="lang-card disabled" aria-label="Español (bientôt disponible)">
+        <span class="flag" aria-hidden="true">🇪🇸</span>
+        <span class="lang-name">Español</span>
+        <input type="checkbox" disabled aria-label="Español indisponible" />
+      </label>
+
+      <!-- Chinois traditionnel -->
+      <label class="lang-card disabled"  data-lang="zh-Hant"  aria-label="繁體中文 (bientôt disponible)">
+        <span class="flag" aria-hidden="true">🇹🇼</span>
+        <span class="lang-name">繁體中文</span>
+        <input type="checkbox" disabled aria-label="繁體中文 indisponible" />
+      </label>
+
+      <!-- Arabe -->
+      <label class="lang-card disabled" aria-label="العربية (bientôt disponible)">
+        <span class="flag" aria-hidden="true">🇸🇦</span>
+        <span class="lang-name">العربية</span>
+        <input type="checkbox" disabled aria-label="العربية indisponible" />
+      </label>
+
+      <!-- Hindi -->
+      <label class="lang-card disabled" aria-label="हिन्दी (bientôt disponible)">
+        <span class="flag" aria-hidden="true">🇮🇳</span>
+        <span class="lang-name">हिन्दी</span>
+        <input type="checkbox" disabled aria-label="हिन्दी indisponible" />
+      </label>
+    </div>
+
+    <p class="lang-note" data-i18n="languages.note">
+      Les autres langues arrivent bientôt.
+    </p>
+  </section>
+</main>
+
   <!-- ================= JS ================= -->
   <script src="index.js"></script>
 
