@@ -1,7 +1,7 @@
 {
   "schema": "TidyZou-export",
   "version": 2,
-  "exportedAt": "2026-02-06T13:09:27.416Z",
+  "exportedAt": "2026-02-07T19:25:12.515Z",
   "data": {
     "children": [
       {
@@ -20,7 +20,7 @@
         },
         "tasks": [
           {
-            "name": "Ranger les jouets",
+            "name": "Laver les mains",
             "weight": 5
           },
           {
@@ -28,24 +28,24 @@
             "weight": 5
           },
           {
-            "name": "Ranger les livres",
-            "weight": 4
+            "name": "Ranger les jouets",
+            "weight": 3
           },
           {
             "name": "Brosser les dents",
-            "weight": 4
+            "weight": 5
+          },
+          {
+            "name": "Ranger les livres",
+            "weight": 3
           },
           {
             "name": "Ranger les chaussures",
-            "weight": 3
+            "weight": 4
           },
           {
             "name": "Accrocher le manteau",
-            "weight": 3
-          },
-          {
-            "name": "Laver les mains",
-            "weight": 2
+            "weight": 4
           }
         ],
         "notes": {
@@ -55,7 +55,7 @@
               0,
               0,
               0,
-              1,
+              0,
               0,
               0
             ],
@@ -73,7 +73,7 @@
               0,
               0,
               0,
-              0,
+              1,
               0,
               0
             ],
@@ -378,7 +378,7 @@
         "history": [
           {
             "week": "6-2026",
-            "pts": "10.0",
+            "pts": "8.0",
             "reward": "",
             "palier": ""
           }
@@ -400,36 +400,44 @@
         },
         "tasks": [
           {
-            "name": "Ranger ses jouets",
-            "weight": 1
+            "name": "Mettre la table",
+            "weight": 3
           },
           {
-            "name": "Mettre la table",
-            "weight": 1
+            "name": "Faire son lit",
+            "weight": 5
           },
           {
             "name": "Se servir de l'eau seul",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Arroser les plantes",
             "weight": 1
           },
           {
-            "name": "mettre le linge au sale",
-            "weight": 1
-          },
-          {
             "name": "Plier des serviettes",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "s'habiller seul",
-            "weight": 1
+            "weight": 3
+          },
+          {
+            "name": "Ranger sa chambre",
+            "weight": 5
+          },
+          {
+            "name": "Ranger ses jouets",
+            "weight": 5
           },
           {
             "name": "nourrir le chat/chien",
             "weight": 1
+          },
+          {
+            "name": "mettre le linge au sale",
+            "weight": 5
           },
           {
             "name": "ranger les courses",
@@ -437,34 +445,26 @@
           },
           {
             "name": "Se laver seul",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "S'essuyer seul aux WC",
-            "weight": 1
-          },
-          {
-            "name": "Ranger les vêtements",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "remplir lave vaisselle",
-            "weight": 1
+            "weight": 2
+          },
+          {
+            "name": "Ranger les vêtements",
+            "weight": 5
           },
           {
             "name": "Nettoyer sa place repas",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Jeter les dechets poubelle",
-            "weight": 1
-          },
-          {
-            "name": "Faire son lit",
-            "weight": 1
-          },
-          {
-            "name": "Ranger sa chambre",
             "weight": 1
           }
         ],
@@ -1272,7 +1272,7 @@
         "tasks": [
           {
             "name": "Vider le lave vaisselle",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Arracher les herbes",
@@ -1288,39 +1288,39 @@
           },
           {
             "name": "Vider boite gouter",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Remettre papier toilette",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "PLier le linge",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Aider au repas",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "S'habiller seul",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Faire son lit",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Mettre le linge au sale",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Acheter le pain/croissants",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Préparer son gouter",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Preparer sa valise",
@@ -1328,27 +1328,23 @@
           },
           {
             "name": "Essuyer la table",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Passer le balai",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Ranger sa chambre",
-            "weight": 1
-          },
-          {
-            "name": "Preparer son cartable",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Faire ses devoirs",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Préparer son sac",
-            "weight": 1
+            "weight": 5
           }
         ],
         "notes": {
@@ -1523,27 +1519,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "5-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -1887,27 +1865,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "8-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -2251,22 +2211,13 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ]
         },
         "history": [
           {
             "week": "6-2026",
-            "pts": "4.0",
+            "pts": "6.0",
             "reward": "",
             "palier": ""
           }
@@ -2290,19 +2241,19 @@
         "tasks": [
           {
             "name": "Faire son lit",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Ranger sa chambre",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Ranger son armoire",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Remplir le lave vaisselle",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Faire sa valise",
@@ -2310,31 +2261,31 @@
           },
           {
             "name": "Preparer son petit dej",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Passer le balais",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Ranger les courses",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Plier les vêtements",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Ranger les vêtements",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Vider le lave vaisselle",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Règler son réveil",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Nettoyer velo/skate/roller...",
@@ -2342,11 +2293,11 @@
           },
           {
             "name": "Enlever les draps sales",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Jeter la poubelle",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Récupérer le courrier",
@@ -2354,7 +2305,7 @@
           },
           {
             "name": "Préparer son sac",
-            "weight": 1
+            "weight": 5
           }
         ],
         "notes": {
@@ -3160,36 +3111,28 @@
         },
         "tasks": [
           {
-            "name": "Ranger sa chambre",
-            "weight": 1
-          },
-          {
             "name": "Faire son lit",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Mettre la table",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Débarrasser la table",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "remplir le lave vaisselle",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Vider le lave vaisselle",
-            "weight": 1
-          },
-          {
-            "name": "Nettoyer la SDB",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Passer l'aspirateur",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Faire du petit bricolage",
@@ -3197,56 +3140,51 @@
           },
           {
             "name": "Nettoyer la cuisine",
-            "weight": 1
+            "weight": 3
+          },
+          {
+            "name": "Ranger sa salle de bain",
+            "weight": 5
           },
           {
             "name": "Faire ses devoirs",
-            "weight": 1
-          },
-          {
-            "name": "préparer son sac",
-            "weight": 1
-          },
-          {
-            "name": "2tendre le linge",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Nourrir le Chat/Chien",
             "weight": 1
           },
           {
+            "name": "préparer son sac",
+            "weight": 5
+          },
+          {
             "name": "Lancer le lave vaisselle",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Lancer le lave linge",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Lancer le seche linge",
-            "weight": 1
-          },
-          {
-            "name": "Ranger sa salle de bain",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Ranger son armoire",
-            "weight": 1
+            "weight": 5
+          },
+          {
+            "name": "Etendre le linge",
+            "weight": 2
+          },
+          {
+            "name": "Ranger la chambre",
+            "weight": 5
           }
         ],
         "notes": {
           "6-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -3572,27 +3510,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "7-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -3918,27 +3838,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "9-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -4106,7 +4008,7 @@
         "history": [
           {
             "week": "6-2026",
-            "pts": "4.0",
+            "pts": "13.0",
             "reward": "",
             "palier": ""
           }
@@ -4130,19 +4032,19 @@
         "tasks": [
           {
             "name": "Faire son lit",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Ranger sa chambre",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Ranger sa salle de bain",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Ranger son armoire",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Tondre la pelouse",
@@ -4150,68 +4052,55 @@
           },
           {
             "name": "Vider le lave vaisselle",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Remplir le lave vaisselle",
-            "weight": 1
+            "weight": 4
           },
           {
             "name": "Lave la voiture",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Faire des petites courses",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Préparer un repas simple",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Nettoyer les fenêtres",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Faire ses devoirs",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "Préparer son sac",
-            "weight": 1
+            "weight": 5
           },
           {
             "name": "S'occuper des ses freres et soeurs",
-            "weight": 1
+            "weight": 2
           },
           {
             "name": "Changer les draps",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Lancer la lessive",
-            "weight": 1
+            "weight": 3
           },
           {
             "name": "Lancer le sechec linge",
-            "weight": 1
-          },
-          {
-            "name": "Faire seul un trajet",
-            "weight": 1
+            "weight": 3
           }
         ],
         "notes": {
           "6-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -4519,27 +4408,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "7-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -4847,27 +4718,9 @@
               0,
               0,
               0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
             ]
           ],
           "9-2026": [
-            [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
             [
               0,
               0,
@@ -5034,6 +4887,6 @@
         "rewardsByWeek": {}
       }
     ],
-    "currentChild": 4
+    "currentChild": 5
   }
 }
