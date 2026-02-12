@@ -1993,3 +1993,24 @@ html.device-small-phone #vue-jour .jour-btn.active {
   object-fit: contain;
   flex-shrink: 0;
 }
+
+
+.qr-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.qr-section img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.25);
+  margin-top: 1rem;
+}
+
+.qr-caption {
+  font-size: .9rem;
+  color: #475569;
+  margin-top: .5rem;
+}
