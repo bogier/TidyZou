@@ -2014,3 +2014,12 @@ html.device-small-phone #vue-jour .jour-btn.active {
   color: #475569;
   margin-top: .5rem;
 }
+
+.features {
+  text-align: left;        /* important */
+  padding-left: 20px;      /* espace pour la pastille */
+}
+
+.features li {
+  margin-bottom: 10px;
+}

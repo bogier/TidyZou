@@ -246,7 +246,7 @@ header.app-header .sidebar-logo {
 
   <h1>TidyZou</h1>
 
-  <img src="/appli/TidyZouSmileTransparent.png"
+  <img src="appli/TidyZouSmileTransparent.png"
        alt="TidyZou"
        class="sidebar-logo">
 </header>
@@ -256,8 +256,7 @@ header.app-header .sidebar-logo {
     <section class="qr-section">
       <h2>Prise en main</h2>
       <p>
-        Scanne ce QR code pour accéder directement à TidyZou sur ton téléphone
-        et commencer en quelques secondes.
+        Scanne ce QR code pour voir la video de prise en main de Tidyzou.
       </p>
 
 		<a href="https://youtu.be/xx88ox5xQ20" target="_blank" rel="noopener noreferrer">
@@ -266,7 +265,7 @@ header.app-header .sidebar-logo {
 
 
       <p class="qr-caption">
-        Astuce : ouvre la caméra de ton smartphone et pointe-la vers le code.
+        Astuce : tu peux aussi cliquer sur le QRCode.
       </p>
     </section>
 
@@ -275,10 +274,23 @@ header.app-header .sidebar-logo {
     <h1>À propos de TidyZou</h1>
 
     <p>
-      <strong>TidyZou</strong> est une appli (PWA + app mobile via Capacitor) pensée pour transformer les tâches du quotidien
+      <strong>TidyZou</strong> est une appli pensée pour transformer les tâches du quotidien
       en un jeu clair, mesurable et (un peu) irrésistible. L’idée : moins de négociations floues, plus de visibilité,
       et des récompenses décidées sur des faits.
     </p>
+
+		<div class="highlight">
+          <strong>TidyZou apporte du calme et accompagne l'enfant dans son évolution</strong>
+		  
+		  <ul class="features">
+			<li><strong>3ans</strong> Premiers gestes d’autonomie et rituels simples du quotidien</li>
+			<li><strong>5ans</strong> Responsabilités guidées et participation active à la maison</li>
+			<li><strong>7ans</strong> Autonomie encadrée et compréhension des règles communes</li>
+			<li><strong>9ans</strong> Organisation personnelle et engagement dans les tâches </li>
+			<li><strong>11ans</strong> Responsabilisation progressive et gestion de ses missions</li>
+			<li><strong>12ans et +</strong> Autonomie avancée et contribution équitable à la vie familiale </li>
+		  </ul>
+      </div>
 
     <div class="tag-list">
       <span class="pill"><span>Multi‑enfants</span></span>
@@ -301,8 +313,8 @@ header.app-header .sidebar-logo {
           <ul>
             <li>Ajouter plusieurs enfants et basculer d’un profil à l’autre depuis le menu.</li>
             <li>Personnaliser <strong>Nom</strong>, <strong>Avatar</strong>, <strong>Âge</strong> et <strong>Genre</strong>.</li>
-            <li>Upload avatar avec garde-fous : max <strong>5 Mo</strong>, redimensionnement auto en <strong>200×200</strong>, stockage en base64.</li>
-            <li>Importer un <strong>enfant de démo</strong> pour tester rapidement.</li>
+            <li>Upload avatar avec garde-fous : max <strong>5 Mo</strong>.</li>
+            <li>Importer l'<strong>exemple</strong> pour tester rapidement.</li>
           </ul>
 
           <h3>Gestion des tâches</h3>
@@ -331,7 +343,7 @@ header.app-header .sidebar-logo {
           <h3>Échelle de validation (les “ronds”)</h3>
           <ul>
             <li>🔴 <strong>0</strong> : non fait</li>
-            <li>🟡 <strong>0,5</strong> : fait à moitié / OK-ish</li>
+            <li>🟡 <strong>0,5</strong> : fait à moitié / pas fait seul</li>
             <li>🟢 <strong>1</strong> : validé</li>
           </ul>
           <p class="small">
@@ -370,15 +382,6 @@ header.app-header .sidebar-logo {
             <li><strong>Récompenses personnalisées par semaine</strong> (par palier), pour adapter la carotte au contexte.</li>
           </ul>
         </div>
-
-        <div class="card">
-          <h3>Puzzle (gamification)</h3>
-          <ul>
-            <li>Puzzle progressif qui se révèle au fur et à mesure de la progression.</li>
-            <li>Upload d’une image de puzzle et possibilité de la supprimer.</li>
-            <li>Animation de révélation (fade / scale) pour le côté “wah”.</li>
-          </ul>
-        </div>
       </div>
 
       <div class="grid" style="margin-top:1.2rem;">
@@ -387,12 +390,8 @@ header.app-header .sidebar-logo {
           <ul>
             <li>Vue “Notifications” : activer/désactiver + choisir une <strong>heure</strong>.</li>
             <li>Bouton “Tester une notification”.</li>
-            <li>Sur mobile (Capacitor), programmation quotidienne + canal Android dédié.</li>
             <li>Mode <strong>self-healing</strong> : si une notif disparaît, l’app peut la reprogrammer au relaunch/resume.</li>
           </ul>
-          <p class="small">
-            Sur navigateur web, les notifications peuvent être limitées selon le support du navigateur.
-          </p>
         </div>
       </div>
 
@@ -459,63 +458,19 @@ header.app-header .sidebar-logo {
       </p>
 
       <div class="highlight">
-        <strong>En clair :</strong> les données sont stockées dans le <code>localStorage</code> du navigateur / WebView.
-        Rien n’est envoyé à un serveur distant par l’app pour tes enfants.
+        <strong>En clair :</strong> c'est SECURE.
       </div>
 
       <h3>Où sont stockées les données ?</h3>
       <p class="small">
-        La structure exacte peut évoluer (d’où une clé de version de schéma), mais aujourd’hui les principales clés sont :
+        dans le smartphone SEULEMENT et nul par ailleurs
       </p>
 
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Clé</th>
-            <th>Contenu</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>children</code></td>
-            <td>
-              Tableau des profils enfants et de leurs données :
-              <ul>
-                <li><strong>settings</strong> : nom, avatar (base64), âge, genre, paliers &amp; récompenses.</li>
-                <li><strong>tasks</strong> : liste des tâches + poids.</li>
-                <li><strong>notes</strong> : notes par semaine (matrice des validations).</li>
-                <li><strong>history</strong> : historique (scores hebdo, récompenses obtenues).</li>
-                <li><strong>rewardsByWeek</strong> : récompenses personnalisées par semaine.</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td><code>TIDYZOU_SCHEMA_VERSION</code></td>
-            <td>Version interne du schéma de données (actuellement 2).</td>
-          </tr>
-          <tr>
-            <td><code>TIDYZOU_NOTIF_ENABLED</code></td>
-            <td>Flag d’activation des notifications (app mobile).</td>
-          </tr>
-          <tr>
-            <td><code>TIDYZOU_NOTIF_TIME</code></td>
-            <td>Heure configurée (ex. <code>18:00</code>).</td>
-          </tr>
-          <tr>
-            <td><code>TIDYZOU_NOTIF_NEXT_AT</code></td>
-            <td>Prochaine date planifiée (epoch ms) pour la notif quotidienne.</td>
-          </tr>
-          <tr>
-            <td><code>purged</code></td>
-            <td>Flag utilisé pour éviter de recréer automatiquement un enfant de démo après une purge totale.</td>
-          </tr>
-        </tbody>
-      </table>
+
 
       <h3>Comment supprimer mes données ?</h3>
       <ul>
         <li><strong>Depuis l’app :</strong> menu → <em>Réinitialiser les enfants</em> ou <em>Tout supprimer</em>.</li>
-        <li><strong>Depuis le navigateur :</strong> effacer les données du site (stockage local).</li>
       </ul>
 
       <p class="small">
@@ -530,16 +485,15 @@ header.app-header .sidebar-logo {
       <h2>4. Hors-ligne, mises à jour &amp; installation</h2>
 
       <p>
-        TidyZou fonctionne <strong>hors-ligne</strong> grâce à un <strong>service worker</strong> (cache des fichiers de l’app).
+        TidyZou fonctionne <strong>hors-ligne</strong>.
       </p>
 
       <ul>
         <li>Les mises à jour peuvent être récupérées en arrière-plan et proposées via un bandeau “Nouvelle version disponible” (bouton “Mettre à jour maintenant”).</li>
-        <li>En PWA, tu peux l’installer sur l’écran d’accueil (expérience “app”).</li>
       </ul>
 
       <p class="small">
-        Important : le service worker met en cache l’application (les fichiers), pas tes données (qui restent dans le stockage local).
+        Important : les données restent en local.
       </p>
     </section>
 
@@ -569,7 +523,9 @@ header.app-header .sidebar-logo {
     <section class="section-footer">
       <p class="small">
         TidyZou est un terrain de jeu sérieux : gamification, UX et offline-first, mais sans te voler tes données.
-        Objectif final : une ambiance familiale plus chill… et une salle de bain plus clean 🧼✨.
+        Objectif final : une ambiance familiale plus chill… et une salle de bain plus clean.
+
+		
       </p>
     </section>
 	
